@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0080)file:///C:/Users/user/Documents/Mis%20documentos/Tablas%20excel/Polla/index.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>⚽ Polla Mundial 2026</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="./index_files/xlsx.full.min.js.descargar"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
 :root{--verde:#006233;--verde-c:#009f4d;--oro:#D4A017;--oro-c:#f0c040;--dark:#0a0e0a;--card:#111811;--card2:#162016;--border:#1f2e1f;--text:#e8f0e8;--muted:#7a9a7a}
@@ -126,7 +126,7 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 <div class="header">
   <div style="font-size:2rem;margin-bottom:3px">⚽🏆</div>
   <h1>POLLA MUNDIAL 2026</h1>
-  <div class="header-sub" id="header-sub">Tablero Oficial · Sube el Excel para ver resultados</div>
+  <div class="header-sub" id="header-sub">Tablero Oficial · 0 partidos jugados</div>
   <div class="header-stats">
     <div class="hstat"><div class="hstat-val">32</div><div class="hstat-lbl">Participantes</div></div>
     <div class="hstat"><div class="hstat-val">$775K</div><div class="hstat-lbl">Bolsa total</div></div>
@@ -139,35 +139,30 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 <div class="update-bar">
   <div>
     <div class="update-label">⚽ Polla Mundial 2026 · Tablero en vivo</div>
-    <div class="update-info" id="last-update">Datos actualizados al inicio del torneo</div>
+    <div class="update-info" id="last-update">Actualizado: 11 de jun, 01:35 p. m. · 2 partidos definidos</div>
   </div>
   <!-- Icono secreto: 5 clics rápidos activan el panel de admin -->
-  <div id="secret-trigger" onclick="adminClick()" title=""
-    style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.18;font-size:1.1rem;user-select:none">
+  <div id="secret-trigger" onclick="adminClick()" title="" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.18;font-size:1.1rem;user-select:none">
     ⚙
   </div>
 </div>
 
 <!-- Panel de admin: oculto, aparece solo con contraseña -->
-<div id="admin-panel" style="display:none;background:#0a1a0a;border-bottom:2px solid var(--oro);padding:12px 16px;">
+<div id="admin-panel" style="display: block; background: rgb(10, 26, 10); border-bottom: 2px solid var(--oro); padding: 12px 16px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div id="admin-auth" style="display:flex;align-items:center;gap:8px;flex:1;min-width:220px">
-      <input id="admin-pass" type="password" placeholder="Contraseña de administrador"
-        style="background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Inter',sans-serif;font-size:.82rem;padding:7px 11px;outline:none;flex:1"
-        onkeydown="if(event.key==='Enter')checkPass()">
-      <button onclick="checkPass()"
-        style="background:var(--verde);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer">
+    <div id="admin-auth" style="display: none; align-items: center; gap: 8px; flex: 1 1 0%; min-width: 220px;">
+      <input id="admin-pass" type="password" placeholder="Contraseña de administrador" style="background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:&#39;Inter&#39;,sans-serif;font-size:.82rem;padding:7px 11px;outline:none;flex:1" onkeydown="if(event.key===&#39;Enter&#39;)checkPass()">
+      <button onclick="checkPass()" style="background:var(--verde);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:&#39;Inter&#39;,sans-serif;font-size:.78rem;font-weight:600;cursor:pointer">
         Entrar
       </button>
     </div>
-    <div id="admin-controls" style="display:none;align-items:center;gap:10px;flex-wrap:wrap">
+    <div id="admin-controls" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
       <span style="font-size:.7rem;color:var(--verde-c);letter-spacing:1px;text-transform:uppercase">🔐 Admin activo</span>
-      <button class="upload-btn" onclick="document.getElementById('file-input').click()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <button class="upload-btn" onclick="document.getElementById(&#39;file-input&#39;).click()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
         Subir Excel
       </button>
-      <button onclick="closeAdmin()"
-        style="background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-family:'Inter',sans-serif;font-size:.76rem;cursor:pointer">
+      <button onclick="closeAdmin()" style="background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-family:&#39;Inter&#39;,sans-serif;font-size:.76rem;cursor:pointer">
         Cerrar sesión
       </button>
     </div>
@@ -178,57 +173,1369 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 <input type="file" id="file-input" accept=".xlsx,.xls" onchange="loadExcel(this)" style="display:none">
 
 <nav class="nav">
-  <button class="nav-btn active" onclick="showTab('tabla',this)">🏆 Posiciones</button>
-  <button class="nav-btn" onclick="showTab('pronos',this)">🎯 Pronósticos</button>
-  <button class="nav-btn" onclick="showTab('partidos',this)">⚽ Partidos</button>
-  <button class="nav-btn" onclick="showTab('iniciales',this)">🌟 Predicciones</button>
-  <button class="nav-btn" onclick="showTab('graficas',this)">📊 Gráficas</button>
+  <button class="nav-btn active" onclick="showTab(&#39;tabla&#39;,this)">🏆 Posiciones</button>
+  <button class="nav-btn" onclick="showTab(&#39;pronos&#39;,this)">🎯 Pronósticos</button>
+  <button class="nav-btn" onclick="showTab(&#39;partidos&#39;,this)">⚽ Partidos</button>
+  <button class="nav-btn" onclick="showTab(&#39;iniciales&#39;,this)">🌟 Predicciones</button>
+  <button class="nav-btn" onclick="showTab(&#39;graficas&#39;,this)">📊 Gráficas</button>
 </nav>
 
 <div id="tabla" class="section active">
-  <div id="podium-wrap"></div>
+  <div id="podium-wrap"><div class="podium"><div class="podium-card silver">
+        <div class="podium-medal">🥈</div>
+        <div class="podium-rank">#2</div>
+        <div class="podium-name">Sergio Echeverria</div>
+        <div class="podium-pts">0</div>
+        <div class="podium-pts-lbl">puntos</div>
+      </div><div class="podium-card gold">
+        <div class="podium-medal">🥇</div>
+        <div class="podium-rank">#1</div>
+        <div class="podium-name">Michael Letrado</div>
+        <div class="podium-pts">0</div>
+        <div class="podium-pts-lbl">puntos</div>
+      </div><div class="podium-card bronze">
+        <div class="podium-medal">🥉</div>
+        <div class="podium-rank">#3</div>
+        <div class="podium-name">Gabriel Letrado</div>
+        <div class="podium-pts">0</div>
+        <div class="podium-pts-lbl">puntos</div>
+      </div></div></div>
   <table class="standings-table">
     <thead><tr><th>#</th><th>Participante</th><th style="text-align:right">Puntos</th></tr></thead>
-    <tbody id="standings-body">
-      <tr><td colspan="3"><div class="empty"><div class="empty-icon">📂</div><p>Sube tu Excel actualizado para ver<br>la tabla de posiciones en vivo</p></div></td></tr>
-    </tbody>
+    <tbody id="standings-body"><tr>
+      <td class="rank-num rank-1">1</td>
+      <td>Michael Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num rank-2">2</td>
+      <td>Sergio Echeverria</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num rank-3">3</td>
+      <td>Gabriel Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">4</td>
+      <td>Javier Adames</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">5</td>
+      <td>Edward Rios</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">6</td>
+      <td>Karen Vargas</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">7</td>
+      <td>Monica Marin</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">8</td>
+      <td>Cesar Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">9</td>
+      <td>Kevin Ravelo</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">10</td>
+      <td>Mateo Salamanca</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">11</td>
+      <td>Esmeralda Rueda</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">12</td>
+      <td>Julian Rodriguez</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">13</td>
+      <td>Diego Marin</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">14</td>
+      <td>Samuel Ramirez</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">15</td>
+      <td>Cristian Godoy</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">16</td>
+      <td>Peter Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">17</td>
+      <td>Nicolas Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">18</td>
+      <td>Orlando Narvaez</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">19</td>
+      <td>Andres Castro</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">20</td>
+      <td>Fredy Hernandez</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">21</td>
+      <td>Sneyder Bonilla</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">22</td>
+      <td>Yury Romero</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">23</td>
+      <td>Juan Moreno</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">24</td>
+      <td>Oscar Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">25</td>
+      <td>Juan Merchan</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">26</td>
+      <td>Abraham Ramirez</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">27</td>
+      <td>Juan Naranjo</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">28</td>
+      <td>Felipe Higuita</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">29</td>
+      <td>Mariana Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">30</td>
+      <td>Dilan Buitrago</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">31</td>
+      <td>Deivyd Ramirez</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr><tr>
+      <td class="rank-num ">32</td>
+      <td>Fredy Letrado</td>
+      <td><div class="pts-row-wrap">
+        <div class="pts-bar" style="width:1px;max-width:80px"></div>
+        <span class="pts-badge">0</span>
+      </div></td>
+    </tr></tbody>
   </table>
 </div>
 
 <div id="pronos" class="section">
   <input class="search-bar" type="text" placeholder="Buscar participante..." oninput="filterCards(this.value)">
-  <div id="part-grid"><div class="empty"><div class="empty-icon">🎯</div><p>Sube el Excel para ver los pronósticos<br>de cada participante</p></div></div>
+  <div id="part-grid"><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">1</div>
+        <div class="part-info">
+          <div class="part-name">Michael Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Cristiano Ronaldo</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Belgica</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">2</div>
+        <div class="part-info">
+          <div class="part-name">Sergio Echeverria</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">3–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Luis Suarez</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Luis Diaz</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">James Rodriguez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Luis Diaz</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Colombia</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">3</div>
+        <div class="part-info">
+          <div class="part-name">Gabriel Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">4</div>
+        <div class="part-info">
+          <div class="part-name">Javier Adames</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">5</div>
+        <div class="part-info">
+          <div class="part-name">Edward Rios</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Musiala</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Cristiano Ronaldo</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">6</div>
+        <div class="part-info">
+          <div class="part-name">Karen Vargas</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">7</div>
+        <div class="part-info">
+          <div class="part-name">Monica Marin</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">8</div>
+        <div class="part-info">
+          <div class="part-name">Cesar Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">1–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">9</div>
+        <div class="part-info">
+          <div class="part-name">Kevin Ravelo</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">1–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">10</div>
+        <div class="part-info">
+          <div class="part-name">Mateo Salamanca</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Pedri</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Julian Alvarez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">11</div>
+        <div class="part-info">
+          <div class="part-name">Esmeralda Rueda</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">12</div>
+        <div class="part-info">
+          <div class="part-name">Julian Rodriguez</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–2</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Brasil</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Haaland</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Raphina</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">James Rodriguez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Brasil</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">13</div>
+        <div class="part-info">
+          <div class="part-name">Diego Marin</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Haaland</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">14</div>
+        <div class="part-info">
+          <div class="part-name">Samuel Ramirez</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Inglaterra</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Haaland</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Colombia</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">15</div>
+        <div class="part-info">
+          <div class="part-name">Cristian Godoy</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Raphinha</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Brasil</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">16</div>
+        <div class="part-info">
+          <div class="part-name">Peter Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">17</div>
+        <div class="part-info">
+          <div class="part-name">Nicolas Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">18</div>
+        <div class="part-info">
+          <div class="part-name">Orlando Narvaez</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">0–2</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Havertz</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Pedri</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Havertz</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">19</div>
+        <div class="part-info">
+          <div class="part-name">Andres Castro</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Musiala</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Francia</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">20</div>
+        <div class="part-info">
+          <div class="part-name">Fredy Hernandez</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Doue</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">De Bruyne</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">21</div>
+        <div class="part-info">
+          <div class="part-name">Sneyder Bonilla</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">1–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">22</div>
+        <div class="part-info">
+          <div class="part-name">Yury Romero</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">1–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">23</div>
+        <div class="part-info">
+          <div class="part-name">Juan Moreno</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Musiala</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Luis Diaz</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Brasil</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">24</div>
+        <div class="part-info">
+          <div class="part-name">Oscar Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–2</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Julian Alvarez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Francia</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">25</div>
+        <div class="part-info">
+          <div class="part-name">Juan Merchan</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–2</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Dembele</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Alemania</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">26</div>
+        <div class="part-info">
+          <div class="part-name">Abraham Ramirez</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Julian Alvarez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Belgica</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">27</div>
+        <div class="part-info">
+          <div class="part-name">Juan Naranjo</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">3–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Cherki</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">28</div>
+        <div class="part-info">
+          <div class="part-name">Felipe Higuita</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–0</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Inglaterra</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">29</div>
+        <div class="part-info">
+          <div class="part-name">Mariana Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–2</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Paises Bajos</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">30</div>
+        <div class="part-info">
+          <div class="part-name">Dilan Buitrago</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–0</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">0–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">31</div>
+        <div class="part-info">
+          <div class="part-name">Deivyd Ramirez</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
+        </div>
+      </div>
+    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <div class="part-header">
+        <div class="part-rank">32</div>
+        <div class="part-info">
+          <div class="part-name">Fredy Letrado</div>
+          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-detail">
+        <div class="detail-section">
+          <div class="detail-title">Pronósticos por partido</div>
+          <div class="match-list"><div class="match-row">
+        <span class="match-team">Mexico</span>
+        <span class="match-score">2–1</span>
+        <span class="match-team right">Sudafrica</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div><div class="match-row">
+        <span class="match-team">Corea</span>
+        <span class="match-score">1–1</span>
+        <span class="match-team right">R. Checa</span>
+        <span class="pts-chip chip-nd">–</span>
+      </div></div>
+        </div>
+        <div class="detail-section">
+          <div class="detail-title">Predicciones iniciales</div>
+          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Argentina</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Francia</div></div></div>
+        </div>
+      </div>
+    </div></div>
 </div>
 
 <div id="partidos" class="section">
-  <div id="partidos-list"><div class="empty"><div class="empty-icon">⚽</div><p>Sube el Excel para ver partidos y resultados</p></div></div>
+  <div id="partidos-list"><div class="partido-card">
+      <div class="partido-num">Partido 1</div>
+      <div class="partido-teams">
+        <div class="partido-team-name">Mexico</div><div class="partido-result pending">Por jugarse</div>
+        <div class="partido-team-name right">Sudafrica</div>
+      </div>
+      
+      
+      </div><div class="partido-card">
+      <div class="partido-num">Partido 2</div>
+      <div class="partido-teams">
+        <div class="partido-team-name">Corea</div><div class="partido-result pending">Por jugarse</div>
+        <div class="partido-team-name right">R. Checa</div>
+      </div>
+      
+      
+      </div></div>
 </div>
 
 <div id="iniciales" class="section">
   <div class="init-table-wrap">
     <table class="init-table">
       <thead><tr><th>Participante</th><th>🏆 Campeón</th><th>⚽ Goleador</th><th>⭐ MVP</th><th>🎯 Asistente</th><th>🥇 Gol. Grupos</th><th>🛡️ Mejor Equipo</th></tr></thead>
-      <tbody id="init-tbody"></tbody>
+      <tbody id="init-tbody"><tr><td style="font-weight:600">Michael Letrado</td><td>Francia</td><td>Mbappe</td><td>Mbappe</td><td>Bruno Fernandez</td><td>Cristiano Ronaldo</td><td>Belgica</td></tr><tr><td style="font-weight:600">Sergio Echeverria</td><td>Francia</td><td>Luis Suarez</td><td>Luis Diaz</td><td>James Rodriguez</td><td>Luis Diaz</td><td>Colombia</td></tr><tr><td style="font-weight:600">Gabriel Letrado</td><td>Francia</td><td>Harry Kane</td><td>Mbappe</td><td>Yamal</td><td>Mbappe</td><td>Argentina</td></tr><tr><td style="font-weight:600">Javier Adames</td><td>España</td><td>Mbappe</td><td>Olise</td><td>Yamal</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Edward Rios</td><td>Francia</td><td>Mbappe</td><td>Mbappe</td><td>Musiala</td><td>Cristiano Ronaldo</td><td>España</td></tr><tr><td style="font-weight:600">Karen Vargas</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Monica Marin</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>Argentina</td></tr><tr><td style="font-weight:600">Cesar Letrado</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Kevin Ravelo</td><td>Francia</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>Argentina</td></tr><tr><td style="font-weight:600">Mateo Salamanca</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Pedri</td><td>Julian Alvarez</td><td>Argentina</td></tr><tr><td style="font-weight:600">Esmeralda Rueda</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Yamal</td><td>Lautaro Martinez</td><td>Argentina</td></tr><tr><td style="font-weight:600">Julian Rodriguez</td><td>Brasil</td><td>Haaland</td><td>Raphina</td><td>James Rodriguez</td><td>Lautaro Martinez</td><td>Brasil</td></tr><tr><td style="font-weight:600">Diego Marin</td><td>Francia</td><td>Haaland</td><td>Mbappe</td><td>Yamal</td><td>Lautaro Martinez</td><td>España</td></tr><tr><td style="font-weight:600">Samuel Ramirez</td><td>Inglaterra</td><td>Harry Kane</td><td>Bruno Fernandez</td><td>Bruno Fernandez</td><td>Haaland</td><td>Colombia</td></tr><tr><td style="font-weight:600">Cristian Godoy</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Raphinha</td><td>Brasil</td></tr><tr><td style="font-weight:600">Peter Letrado</td><td>Francia</td><td>Mbappe</td><td>Mbappe</td><td>Olise</td><td>Messi</td><td>Argentina</td></tr><tr><td style="font-weight:600">Nicolas Letrado</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>España</td></tr><tr><td style="font-weight:600">Orlando Narvaez</td><td>España</td><td>Havertz</td><td>Pedri</td><td>Messi</td><td>Havertz</td><td>Argentina</td></tr><tr><td style="font-weight:600">Andres Castro</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Musiala</td><td>Mbappe</td><td>Francia</td></tr><tr><td style="font-weight:600">Fredy Hernandez</td><td>Francia</td><td>Mbappe</td><td>Doue</td><td>De Bruyne</td><td>Harry Kane</td><td>Argentina</td></tr><tr><td style="font-weight:600">Sneyder Bonilla</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Lautaro Martinez</td><td>Argentina</td></tr><tr><td style="font-weight:600">Yury Romero</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Harry Kane</td><td>España</td></tr><tr><td style="font-weight:600">Juan Moreno</td><td>Francia</td><td>Mbappe</td><td>Olise</td><td>Musiala</td><td>Luis Diaz</td><td>Brasil</td></tr><tr><td style="font-weight:600">Oscar Letrado</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Messi</td><td>Julian Alvarez</td><td>Francia</td></tr><tr><td style="font-weight:600">Juan Merchan</td><td>Francia</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Dembele</td><td>Alemania</td></tr><tr><td style="font-weight:600">Abraham Ramirez</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Messi</td><td>Julian Alvarez</td><td>Belgica</td></tr><tr><td style="font-weight:600">Juan Naranjo</td><td>España</td><td>Harry Kane</td><td>Mbappe</td><td>Cherki</td><td>Mbappe</td><td>Argentina</td></tr><tr><td style="font-weight:600">Felipe Higuita</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>Inglaterra</td></tr><tr><td style="font-weight:600">Mariana Letrado</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Bruno Fernandez</td><td>Harry Kane</td><td>Paises Bajos</td></tr><tr><td style="font-weight:600">Dilan Buitrago</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Bruno Fernandez</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Deivyd Ramirez</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Bruno Fernandez</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Fredy Letrado</td><td>Argentina</td><td>Mbappe</td><td>Messi</td><td>Messi</td><td>Mbappe</td><td>Francia</td></tr></tbody>
     </table>
   </div>
 </div>
 
 <div id="graficas" class="section">
-  <div class="chart-wrap"><div class="chart-title">Puntos acumulados por participante</div><div class="bar-chart" id="bar-chart"></div></div>
+  <div class="chart-wrap"><div class="chart-title">Puntos acumulados por participante</div><div class="bar-chart" id="bar-chart"><div class="bar-row">
+      <div class="bar-label">Michael Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Sergio Echeverria</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Gabriel Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Javier Adames</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Edward Rios</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Karen Vargas</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Monica Marin</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Cesar Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Kevin Ravelo</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Mateo Salamanca</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Esmeralda Rueda</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Julian Rodriguez</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Diego Marin</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Samuel Ramirez</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Cristian Godoy</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Peter Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Nicolas Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Orlando Narvaez</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Andres Castro</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Fredy Hernandez</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Sneyder Bonilla</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Yury Romero</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Juan Moreno</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Oscar Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Juan Merchan</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Abraham Ramirez</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Juan Naranjo</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Felipe Higuita</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Mariana Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Dilan Buitrago</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Deivyd Ramirez</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div><div class="bar-row">
+      <div class="bar-label">Fredy Letrado</div>
+      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
+      <div class="bar-val">0</div>
+    </div></div></div>
   <div class="chart-wrap">
     <div class="chart-title">Evolución por jornada</div>
-    <div id="evol-empty" style="color:var(--muted);font-size:.82rem;padding:10px 0">Carga el Excel para ver la evolución jornada a jornada</div>
+    <div id="evol-empty" style="color: var(--muted); font-size: 0.82rem; padding: 10px 0px; display: block;">Sube el Excel después de la próxima jornada para ver la evolución</div>
     <canvas id="evol-chart" style="display:none"></canvas>
   </div>
-  <div class="chart-wrap"><div class="chart-title">🏆 Campeón favorito</div><canvas id="campeon-chart"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">⚽ Goleador más apostado</div><canvas id="goleador-chart"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">⭐ MVP más apostado</div><canvas id="mvp-chart"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">🎯 Máximo asistente apostado</div><canvas id="asist-chart"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">🥇 Goleador fase de grupos apostado</div><canvas id="golgrup-chart"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">🛡️ Mejor equipo fase de grupos apostado</div><canvas id="equipo-chart"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🏆 Campeón favorito</div><canvas id="campeon-chart" width="300" height="207" style="height: 166px;"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">⚽ Goleador más apostado</div><canvas id="goleador-chart" width="300" height="207" style="height: 166px;"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">⭐ MVP más apostado</div><canvas id="mvp-chart" width="300" height="357" style="height: 286px;"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🎯 Máximo asistente apostado</div><canvas id="asist-chart" width="300" height="357" style="height: 286px;"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🥇 Goleador fase de grupos apostado</div><canvas id="golgrup-chart" width="300" height="432" style="height: 346px;"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🛡️ Mejor equipo fase de grupos apostado</div><canvas id="equipo-chart" width="300" height="357" style="height: 286px;"></canvas></div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast">✅ Listo — 0 resultados cargados. Tabla actualizada.</div>
 
 <script>
 // ── MAPA DE PARTIDOS (1-indexed Excel columns) ─────────────
@@ -712,5 +2019,6 @@ function closeAdmin(){
 // Render predicciones iniciales al cargar (siempre disponibles)
 renderIniciales();
 </script>
-</body>
-</html>
+
+
+</body></html>
