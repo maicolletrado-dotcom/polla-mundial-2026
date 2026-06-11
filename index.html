@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- saved from url=(0080)file:///C:/Users/user/Documents/Mis%20documentos/Tablas%20excel/Polla/index.html -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="es">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>⚽ Polla Mundial 2026</title>
-<script src="./index_files/xlsx.full.min.js.descargar"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
 :root{--verde:#006233;--verde-c:#009f4d;--oro:#D4A017;--oro-c:#f0c040;--dark:#0a0e0a;--card:#111811;--card2:#162016;--border:#1f2e1f;--text:#e8f0e8;--muted:#7a9a7a}
@@ -17,12 +17,11 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 .header-stats{display:flex;justify-content:center;gap:24px;margin-top:14px;flex-wrap:wrap}
 .hstat-val{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--oro-c);line-height:1}
 .hstat-lbl{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:1px}
-.update-bar{background:#0d1a0d;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.update-bar{background:#0d1a0d;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .update-label{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 .update-info{font-size:.73rem;color:var(--muted);font-style:italic}
 .upload-btn{display:inline-flex;align-items:center;gap:6px;background:var(--verde);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:background .15s;white-space:nowrap}
 .upload-btn:hover{background:var(--verde-c)}
-#file-input{display:none}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a2e1a;border:1px solid var(--verde-c);border-radius:8px;padding:10px 18px;font-size:.82rem;color:var(--verde-c);z-index:999;transition:transform .3s ease;white-space:nowrap;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .nav{display:flex;overflow-x:auto;background:var(--card);border-bottom:1px solid var(--border);padding:0 8px;scrollbar-width:none}
@@ -114,11 +113,7 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--dark)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@media(max-width:500px){
-  .podium{grid-template-columns:1fr}
-  .bar-row{grid-template-columns:90px 1fr 28px}
-  .init-grid{grid-template-columns:1fr}
-}
+@media(max-width:500px){.podium{grid-template-columns:1fr}.bar-row{grid-template-columns:90px 1fr 28px}.init-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -126,1860 +121,121 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 <div class="header">
   <div style="font-size:2rem;margin-bottom:3px">⚽🏆</div>
   <h1>POLLA MUNDIAL 2026</h1>
-  <div class="header-sub" id="header-sub">Tablero Oficial · 0 partidos jugados</div>
+  <div class="header-sub" id="header-sub">Tablero Oficial</div>
   <div class="header-stats">
     <div class="hstat"><div class="hstat-val">32</div><div class="hstat-lbl">Participantes</div></div>
     <div class="hstat"><div class="hstat-val">$775K</div><div class="hstat-lbl">Bolsa total</div></div>
-    <div class="hstat"><div class="hstat-val" id="stat-played">0</div><div class="hstat-lbl">Partidos jugados</div></div>
-    <div class="hstat"><div class="hstat-val" id="stat-pending">104</div><div class="hstat-lbl">Por jugar</div></div>
+    <div class="hstat"><div class="hstat-val" id="stat-played">2</div><div class="hstat-lbl">Partidos jugados</div></div>
+    <div class="hstat"><div class="hstat-val" id="stat-pending">102</div><div class="hstat-lbl">Por jugar</div></div>
   </div>
 </div>
 
-<!-- Barra visible para todos: solo info de última actualización + icono secreto -->
 <div class="update-bar">
   <div>
     <div class="update-label">⚽ Polla Mundial 2026 · Tablero en vivo</div>
-    <div class="update-info" id="last-update">Actualizado: 11 de jun, 01:35 p. m. · 2 partidos definidos</div>
+    <div class="update-info" id="last-update">Actualizado: 11 Jun 2026, 13:49</div>
   </div>
-  <!-- Icono secreto: 5 clics rápidos activan el panel de admin -->
-  <div id="secret-trigger" onclick="adminClick()" title="" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.18;font-size:1.1rem;user-select:none">
-    ⚙
-  </div>
+  <div id="secret-trigger" onclick="adminClick()" title=""
+    style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.18;font-size:1.1rem;user-select:none">⚙</div>
 </div>
 
-<!-- Panel de admin: oculto, aparece solo con contraseña -->
-<div id="admin-panel" style="display: none; background: rgb(10, 26, 10); border-bottom: 2px solid var(--oro); padding: 12px 16px;">
+<div id="admin-panel" style="display:none;background:#0a1a0a;border-bottom:2px solid var(--oro);padding:12px 16px;">
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <div id="admin-auth" style="display: flex; align-items: center; gap: 8px; flex: 1 1 0%; min-width: 220px;">
-      <input id="admin-pass" type="password" placeholder="Contraseña de administrador" style="background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:&#39;Inter&#39;,sans-serif;font-size:.82rem;padding:7px 11px;outline:none;flex:1" onkeydown="if(event.key===&#39;Enter&#39;)checkPass()">
-      <button onclick="checkPass()" style="background:var(--verde);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:&#39;Inter&#39;,sans-serif;font-size:.78rem;font-weight:600;cursor:pointer">
-        Entrar
-      </button>
+    <div id="admin-auth" style="display:flex;align-items:center;gap:8px;flex:1;min-width:220px">
+      <input id="admin-pass" type="password" placeholder="Contraseña de administrador"
+        style="background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Inter',sans-serif;font-size:.82rem;padding:7px 11px;outline:none;flex:1"
+        onkeydown="if(event.key==='Enter')checkPass()">
+      <button onclick="checkPass()"
+        style="background:var(--verde);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer">Entrar</button>
     </div>
-    <div id="admin-controls" style="display: none; align-items: center; gap: 10px; flex-wrap: wrap;">
+    <div id="admin-controls" style="display:none;align-items:center;gap:10px;flex-wrap:wrap">
       <span style="font-size:.7rem;color:var(--verde-c);letter-spacing:1px;text-transform:uppercase">🔐 Admin activo</span>
-      <button class="upload-btn" onclick="document.getElementById(&#39;file-input&#39;).click()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+      <button class="upload-btn" onclick="document.getElementById('file-input').click()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         Subir Excel
       </button>
-      <button onclick="closeAdmin()" style="background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-family:&#39;Inter&#39;,sans-serif;font-size:.76rem;cursor:pointer">
-        Cerrar sesión
-      </button>
+      <button onclick="closeAdmin()"
+        style="background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-family:'Inter',sans-serif;font-size:.76rem;cursor:pointer">Cerrar sesión</button>
     </div>
     <div id="admin-err" style="display:none;font-size:.76rem;color:#e05555">Contraseña incorrecta</div>
   </div>
 </div>
-
 <input type="file" id="file-input" accept=".xlsx,.xls" onchange="loadExcel(this)" style="display:none">
 
 <nav class="nav">
-  <button class="nav-btn active" onclick="showTab(&#39;tabla&#39;,this)">🏆 Posiciones</button>
-  <button class="nav-btn" onclick="showTab(&#39;pronos&#39;,this)">🎯 Pronósticos</button>
-  <button class="nav-btn" onclick="showTab(&#39;partidos&#39;,this)">⚽ Partidos</button>
-  <button class="nav-btn" onclick="showTab(&#39;iniciales&#39;,this)">🌟 Predicciones</button>
-  <button class="nav-btn" onclick="showTab(&#39;graficas&#39;,this)">📊 Gráficas</button>
+  <button class="nav-btn active" onclick="showTab('tabla',this)">🏆 Posiciones</button>
+  <button class="nav-btn" onclick="showTab('pronos',this)">🎯 Pronósticos</button>
+  <button class="nav-btn" onclick="showTab('partidos',this)">⚽ Partidos</button>
+  <button class="nav-btn" onclick="showTab('iniciales',this)">🌟 Predicciones</button>
+  <button class="nav-btn" onclick="showTab('graficas',this)">📊 Gráficas</button>
 </nav>
 
 <div id="tabla" class="section active">
-  <div id="podium-wrap"><div class="podium"><div class="podium-card silver">
-        <div class="podium-medal">🥈</div>
-        <div class="podium-rank">#2</div>
-        <div class="podium-name">Sergio Echeverria</div>
-        <div class="podium-pts">0</div>
-        <div class="podium-pts-lbl">puntos</div>
-      </div><div class="podium-card gold">
-        <div class="podium-medal">🥇</div>
-        <div class="podium-rank">#1</div>
-        <div class="podium-name">Michael Letrado</div>
-        <div class="podium-pts">0</div>
-        <div class="podium-pts-lbl">puntos</div>
-      </div><div class="podium-card bronze">
-        <div class="podium-medal">🥉</div>
-        <div class="podium-rank">#3</div>
-        <div class="podium-name">Gabriel Letrado</div>
-        <div class="podium-pts">0</div>
-        <div class="podium-pts-lbl">puntos</div>
-      </div></div></div>
+  <div id="podium-wrap"></div>
   <table class="standings-table">
     <thead><tr><th>#</th><th>Participante</th><th style="text-align:right">Puntos</th></tr></thead>
-    <tbody id="standings-body"><tr>
-      <td class="rank-num rank-1">1</td>
-      <td>Michael Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num rank-2">2</td>
-      <td>Sergio Echeverria</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num rank-3">3</td>
-      <td>Gabriel Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">4</td>
-      <td>Javier Adames</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">5</td>
-      <td>Edward Rios</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">6</td>
-      <td>Karen Vargas</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">7</td>
-      <td>Monica Marin</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">8</td>
-      <td>Cesar Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">9</td>
-      <td>Kevin Ravelo</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">10</td>
-      <td>Mateo Salamanca</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">11</td>
-      <td>Esmeralda Rueda</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">12</td>
-      <td>Julian Rodriguez</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">13</td>
-      <td>Diego Marin</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">14</td>
-      <td>Samuel Ramirez</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">15</td>
-      <td>Cristian Godoy</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">16</td>
-      <td>Peter Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">17</td>
-      <td>Nicolas Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">18</td>
-      <td>Orlando Narvaez</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">19</td>
-      <td>Andres Castro</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">20</td>
-      <td>Fredy Hernandez</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">21</td>
-      <td>Sneyder Bonilla</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">22</td>
-      <td>Yury Romero</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">23</td>
-      <td>Juan Moreno</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">24</td>
-      <td>Oscar Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">25</td>
-      <td>Juan Merchan</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">26</td>
-      <td>Abraham Ramirez</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">27</td>
-      <td>Juan Naranjo</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">28</td>
-      <td>Felipe Higuita</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">29</td>
-      <td>Mariana Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">30</td>
-      <td>Dilan Buitrago</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">31</td>
-      <td>Deivyd Ramirez</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr><tr>
-      <td class="rank-num ">32</td>
-      <td>Fredy Letrado</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:1px;max-width:80px"></div>
-        <span class="pts-badge">0</span>
-      </div></td>
-    </tr></tbody>
+    <tbody id="standings-body"></tbody>
   </table>
 </div>
-
 <div id="pronos" class="section">
   <input class="search-bar" type="text" placeholder="Buscar participante..." oninput="filterCards(this.value)">
-  <div id="part-grid"><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">1</div>
-        <div class="part-info">
-          <div class="part-name">Michael Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Cristiano Ronaldo</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Belgica</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">2</div>
-        <div class="part-info">
-          <div class="part-name">Sergio Echeverria</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">3–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Luis Suarez</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Luis Diaz</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">James Rodriguez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Luis Diaz</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Colombia</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">3</div>
-        <div class="part-info">
-          <div class="part-name">Gabriel Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">4</div>
-        <div class="part-info">
-          <div class="part-name">Javier Adames</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">5</div>
-        <div class="part-info">
-          <div class="part-name">Edward Rios</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Musiala</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Cristiano Ronaldo</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">6</div>
-        <div class="part-info">
-          <div class="part-name">Karen Vargas</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">7</div>
-        <div class="part-info">
-          <div class="part-name">Monica Marin</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">8</div>
-        <div class="part-info">
-          <div class="part-name">Cesar Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">1–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">9</div>
-        <div class="part-info">
-          <div class="part-name">Kevin Ravelo</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">1–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">10</div>
-        <div class="part-info">
-          <div class="part-name">Mateo Salamanca</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Pedri</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Julian Alvarez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">11</div>
-        <div class="part-info">
-          <div class="part-name">Esmeralda Rueda</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">12</div>
-        <div class="part-info">
-          <div class="part-name">Julian Rodriguez</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–2</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Brasil</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Haaland</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Raphina</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">James Rodriguez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Brasil</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">13</div>
-        <div class="part-info">
-          <div class="part-name">Diego Marin</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Haaland</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">14</div>
-        <div class="part-info">
-          <div class="part-name">Samuel Ramirez</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Inglaterra</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Haaland</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Colombia</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">15</div>
-        <div class="part-info">
-          <div class="part-name">Cristian Godoy</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Raphinha</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Brasil</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">16</div>
-        <div class="part-info">
-          <div class="part-name">Peter Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">17</div>
-        <div class="part-info">
-          <div class="part-name">Nicolas Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">18</div>
-        <div class="part-info">
-          <div class="part-name">Orlando Narvaez</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">0–2</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Havertz</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Pedri</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Havertz</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">19</div>
-        <div class="part-info">
-          <div class="part-name">Andres Castro</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Musiala</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Francia</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">20</div>
-        <div class="part-info">
-          <div class="part-name">Fredy Hernandez</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Doue</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">De Bruyne</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">21</div>
-        <div class="part-info">
-          <div class="part-name">Sneyder Bonilla</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">1–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Lautaro Martinez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">22</div>
-        <div class="part-info">
-          <div class="part-name">Yury Romero</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">1–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">23</div>
-        <div class="part-info">
-          <div class="part-name">Juan Moreno</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Musiala</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Luis Diaz</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Brasil</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">24</div>
-        <div class="part-info">
-          <div class="part-name">Oscar Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–2</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Julian Alvarez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Francia</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">25</div>
-        <div class="part-info">
-          <div class="part-name">Juan Merchan</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–2</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Francia</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Olise</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Dembele</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Alemania</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">26</div>
-        <div class="part-info">
-          <div class="part-name">Abraham Ramirez</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Julian Alvarez</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Belgica</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">27</div>
-        <div class="part-info">
-          <div class="part-name">Juan Naranjo</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">3–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Cherki</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Argentina</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">28</div>
-        <div class="part-info">
-          <div class="part-name">Felipe Higuita</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–0</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Inglaterra</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">29</div>
-        <div class="part-info">
-          <div class="part-name">Mariana Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–2</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Harry Kane</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Paises Bajos</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">30</div>
-        <div class="part-info">
-          <div class="part-name">Dilan Buitrago</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–0</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">0–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">31</div>
-        <div class="part-info">
-          <div class="part-name">Deivyd Ramirez</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">España</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Yamal</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Bruno Fernandez</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">España</div></div></div>
-        </div>
-      </div>
-    </div><div class="part-card" onclick="this.classList.toggle(&#39;expanded&#39;)">
-      <div class="part-header">
-        <div class="part-rank">32</div>
-        <div class="part-info">
-          <div class="part-name">Fredy Letrado</div>
-          <div class="part-pts-row"><span class="part-pts-num">0</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list"><div class="match-row">
-        <span class="match-team">Mexico</span>
-        <span class="match-score">2–1</span>
-        <span class="match-team right">Sudafrica</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div><div class="match-row">
-        <span class="match-team">Corea</span>
-        <span class="match-score">1–1</span>
-        <span class="match-team right">R. Checa</span>
-        <span class="pts-chip chip-nd">–</span>
-      </div></div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid"><div class="init-item"><div class="init-key">🏆 Campeón</div><div class="init-val">Argentina</div></div><div class="init-item"><div class="init-key">⚽ Goleador</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">⭐ MVP</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🎯 Asistente</div><div class="init-val">Messi</div></div><div class="init-item"><div class="init-key">🥇 Gol. Grupos</div><div class="init-val">Mbappe</div></div><div class="init-item"><div class="init-key">🛡️ Mejor Equipo</div><div class="init-val">Francia</div></div></div>
-        </div>
-      </div>
-    </div></div>
+  <div id="part-grid"></div>
 </div>
-
-<div id="partidos" class="section">
-  <div id="partidos-list"><div class="partido-card">
-      <div class="partido-num">Partido 1</div>
-      <div class="partido-teams">
-        <div class="partido-team-name">Mexico</div><div class="partido-result pending">Por jugarse</div>
-        <div class="partido-team-name right">Sudafrica</div>
-      </div>
-      
-      
-      </div><div class="partido-card">
-      <div class="partido-num">Partido 2</div>
-      <div class="partido-teams">
-        <div class="partido-team-name">Corea</div><div class="partido-result pending">Por jugarse</div>
-        <div class="partido-team-name right">R. Checa</div>
-      </div>
-      
-      
-      </div></div>
-</div>
-
+<div id="partidos" class="section"><div id="partidos-list"></div></div>
 <div id="iniciales" class="section">
   <div class="init-table-wrap">
     <table class="init-table">
       <thead><tr><th>Participante</th><th>🏆 Campeón</th><th>⚽ Goleador</th><th>⭐ MVP</th><th>🎯 Asistente</th><th>🥇 Gol. Grupos</th><th>🛡️ Mejor Equipo</th></tr></thead>
-      <tbody id="init-tbody"><tr><td style="font-weight:600">Michael Letrado</td><td>Francia</td><td>Mbappe</td><td>Mbappe</td><td>Bruno Fernandez</td><td>Cristiano Ronaldo</td><td>Belgica</td></tr><tr><td style="font-weight:600">Sergio Echeverria</td><td>Francia</td><td>Luis Suarez</td><td>Luis Diaz</td><td>James Rodriguez</td><td>Luis Diaz</td><td>Colombia</td></tr><tr><td style="font-weight:600">Gabriel Letrado</td><td>Francia</td><td>Harry Kane</td><td>Mbappe</td><td>Yamal</td><td>Mbappe</td><td>Argentina</td></tr><tr><td style="font-weight:600">Javier Adames</td><td>España</td><td>Mbappe</td><td>Olise</td><td>Yamal</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Edward Rios</td><td>Francia</td><td>Mbappe</td><td>Mbappe</td><td>Musiala</td><td>Cristiano Ronaldo</td><td>España</td></tr><tr><td style="font-weight:600">Karen Vargas</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Monica Marin</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>Argentina</td></tr><tr><td style="font-weight:600">Cesar Letrado</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Kevin Ravelo</td><td>Francia</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>Argentina</td></tr><tr><td style="font-weight:600">Mateo Salamanca</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Pedri</td><td>Julian Alvarez</td><td>Argentina</td></tr><tr><td style="font-weight:600">Esmeralda Rueda</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Yamal</td><td>Lautaro Martinez</td><td>Argentina</td></tr><tr><td style="font-weight:600">Julian Rodriguez</td><td>Brasil</td><td>Haaland</td><td>Raphina</td><td>James Rodriguez</td><td>Lautaro Martinez</td><td>Brasil</td></tr><tr><td style="font-weight:600">Diego Marin</td><td>Francia</td><td>Haaland</td><td>Mbappe</td><td>Yamal</td><td>Lautaro Martinez</td><td>España</td></tr><tr><td style="font-weight:600">Samuel Ramirez</td><td>Inglaterra</td><td>Harry Kane</td><td>Bruno Fernandez</td><td>Bruno Fernandez</td><td>Haaland</td><td>Colombia</td></tr><tr><td style="font-weight:600">Cristian Godoy</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Raphinha</td><td>Brasil</td></tr><tr><td style="font-weight:600">Peter Letrado</td><td>Francia</td><td>Mbappe</td><td>Mbappe</td><td>Olise</td><td>Messi</td><td>Argentina</td></tr><tr><td style="font-weight:600">Nicolas Letrado</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>España</td></tr><tr><td style="font-weight:600">Orlando Narvaez</td><td>España</td><td>Havertz</td><td>Pedri</td><td>Messi</td><td>Havertz</td><td>Argentina</td></tr><tr><td style="font-weight:600">Andres Castro</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Musiala</td><td>Mbappe</td><td>Francia</td></tr><tr><td style="font-weight:600">Fredy Hernandez</td><td>Francia</td><td>Mbappe</td><td>Doue</td><td>De Bruyne</td><td>Harry Kane</td><td>Argentina</td></tr><tr><td style="font-weight:600">Sneyder Bonilla</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Lautaro Martinez</td><td>Argentina</td></tr><tr><td style="font-weight:600">Yury Romero</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Harry Kane</td><td>España</td></tr><tr><td style="font-weight:600">Juan Moreno</td><td>Francia</td><td>Mbappe</td><td>Olise</td><td>Musiala</td><td>Luis Diaz</td><td>Brasil</td></tr><tr><td style="font-weight:600">Oscar Letrado</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Messi</td><td>Julian Alvarez</td><td>Francia</td></tr><tr><td style="font-weight:600">Juan Merchan</td><td>Francia</td><td>Mbappe</td><td>Yamal</td><td>Olise</td><td>Dembele</td><td>Alemania</td></tr><tr><td style="font-weight:600">Abraham Ramirez</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Messi</td><td>Julian Alvarez</td><td>Belgica</td></tr><tr><td style="font-weight:600">Juan Naranjo</td><td>España</td><td>Harry Kane</td><td>Mbappe</td><td>Cherki</td><td>Mbappe</td><td>Argentina</td></tr><tr><td style="font-weight:600">Felipe Higuita</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Yamal</td><td>Harry Kane</td><td>Inglaterra</td></tr><tr><td style="font-weight:600">Mariana Letrado</td><td>España</td><td>Harry Kane</td><td>Yamal</td><td>Bruno Fernandez</td><td>Harry Kane</td><td>Paises Bajos</td></tr><tr><td style="font-weight:600">Dilan Buitrago</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Bruno Fernandez</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Deivyd Ramirez</td><td>España</td><td>Mbappe</td><td>Yamal</td><td>Bruno Fernandez</td><td>Mbappe</td><td>España</td></tr><tr><td style="font-weight:600">Fredy Letrado</td><td>Argentina</td><td>Mbappe</td><td>Messi</td><td>Messi</td><td>Mbappe</td><td>Francia</td></tr></tbody>
+      <tbody id="init-tbody"></tbody>
     </table>
   </div>
 </div>
-
 <div id="graficas" class="section">
-  <div class="chart-wrap"><div class="chart-title">Puntos acumulados por participante</div><div class="bar-chart" id="bar-chart"><div class="bar-row">
-      <div class="bar-label">Michael Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Sergio Echeverria</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Gabriel Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Javier Adames</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Edward Rios</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Karen Vargas</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Monica Marin</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Cesar Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Kevin Ravelo</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Mateo Salamanca</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Esmeralda Rueda</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Julian Rodriguez</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Diego Marin</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Samuel Ramirez</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Cristian Godoy</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Peter Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Nicolas Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Orlando Narvaez</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Andres Castro</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Fredy Hernandez</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Sneyder Bonilla</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Yury Romero</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Juan Moreno</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Oscar Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Juan Merchan</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Abraham Ramirez</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Juan Naranjo</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Felipe Higuita</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Mariana Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Dilan Buitrago</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Deivyd Ramirez</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div><div class="bar-row">
-      <div class="bar-label">Fredy Letrado</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div>
-      <div class="bar-val">0</div>
-    </div></div></div>
+  <div class="chart-wrap"><div class="chart-title">Puntos acumulados</div><div class="bar-chart" id="bar-chart"></div></div>
   <div class="chart-wrap">
     <div class="chart-title">Evolución por jornada</div>
-    <div id="evol-empty" style="color: var(--muted); font-size: 0.82rem; padding: 10px 0px; display: block;">Sube el Excel después de la próxima jornada para ver la evolución</div>
+    <div id="evol-empty" style="color:var(--muted);font-size:.82rem;padding:10px 0">Disponible a partir de la segunda jornada</div>
     <canvas id="evol-chart" style="display:none"></canvas>
   </div>
-  <div class="chart-wrap"><div class="chart-title">🏆 Campeón favorito</div><canvas id="campeon-chart" width="300" height="207" style="height: 166px;"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">⚽ Goleador más apostado</div><canvas id="goleador-chart" width="300" height="207" style="height: 166px;"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">⭐ MVP más apostado</div><canvas id="mvp-chart" width="300" height="357" style="height: 286px;"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">🎯 Máximo asistente apostado</div><canvas id="asist-chart" width="300" height="357" style="height: 286px;"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">🥇 Goleador fase de grupos apostado</div><canvas id="golgrup-chart" width="300" height="432" style="height: 346px;"></canvas></div>
-  <div class="chart-wrap"><div class="chart-title">🛡️ Mejor equipo fase de grupos apostado</div><canvas id="equipo-chart" width="300" height="357" style="height: 286px;"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🏆 Campeón favorito</div><canvas id="campeon-chart"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">⚽ Goleador más apostado</div><canvas id="goleador-chart"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">⭐ MVP más apostado</div><canvas id="mvp-chart"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🎯 Máximo asistente</div><canvas id="asist-chart"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🥇 Goleador fase de grupos</div><canvas id="golgrup-chart"></canvas></div>
+  <div class="chart-wrap"><div class="chart-title">🛡️ Mejor equipo fase de grupos</div><canvas id="equipo-chart"></canvas></div>
 </div>
-
-<div class="toast" id="toast">✅ Listo — 0 resultados cargados. Tabla actualizada.</div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ── MAPA DE PARTIDOS (1-indexed Excel columns) ─────────────
-// plc = col del pronóstico local, pvc = col del pronóstico visitante
-// rlc = col del resultado oficial local (fila 2), rvc = col resultado visitante
-const PM=[{"id":1,"tl":"Mexico","tv":"Sudafrica","plc":2,"pvc":3,"rlc":4,"rvc":5},{"id":2,"tl":"Corea","tv":"R. Checa","plc":6,"pvc":7,"rlc":8,"rvc":9},{"id":3,"tl":null,"tv":null,"plc":11,"pvc":12,"rlc":13,"rvc":14},{"id":4,"tl":null,"tv":null,"plc":15,"pvc":16,"rlc":17,"rvc":18},{"id":5,"tl":null,"tv":null,"plc":20,"pvc":21,"rlc":22,"rvc":23},{"id":6,"tl":null,"tv":null,"plc":24,"pvc":25,"rlc":26,"rvc":27},{"id":7,"tl":null,"tv":null,"plc":28,"pvc":29,"rlc":30,"rvc":31},{"id":8,"tl":null,"tv":null,"plc":32,"pvc":33,"rlc":34,"rvc":35},{"id":9,"tl":null,"tv":null,"plc":37,"pvc":38,"rlc":39,"rvc":40},{"id":10,"tl":null,"tv":null,"plc":41,"pvc":42,"rlc":43,"rvc":44},{"id":11,"tl":null,"tv":null,"plc":45,"pvc":46,"rlc":47,"rvc":48},{"id":12,"tl":null,"tv":null,"plc":49,"pvc":50,"rlc":51,"rvc":52},{"id":13,"tl":null,"tv":null,"plc":54,"pvc":55,"rlc":56,"rvc":57},{"id":14,"tl":null,"tv":null,"plc":58,"pvc":59,"rlc":60,"rvc":61},{"id":15,"tl":null,"tv":null,"plc":62,"pvc":63,"rlc":64,"rvc":65},{"id":16,"tl":null,"tv":null,"plc":66,"pvc":67,"rlc":68,"rvc":69},{"id":17,"tl":null,"tv":null,"plc":71,"pvc":72,"rlc":73,"rvc":74},{"id":18,"tl":null,"tv":null,"plc":75,"pvc":76,"rlc":77,"rvc":78},{"id":19,"tl":null,"tv":null,"plc":79,"pvc":80,"rlc":81,"rvc":82},{"id":20,"tl":null,"tv":null,"plc":83,"pvc":84,"rlc":85,"rvc":86},{"id":21,"tl":null,"tv":null,"plc":88,"pvc":89,"rlc":90,"rvc":91},{"id":22,"tl":null,"tv":null,"plc":92,"pvc":93,"rlc":94,"rvc":95},{"id":23,"tl":null,"tv":null,"plc":96,"pvc":97,"rlc":98,"rvc":99},{"id":24,"tl":null,"tv":null,"plc":100,"pvc":101,"rlc":102,"rvc":103},{"id":25,"tl":null,"tv":null,"plc":105,"pvc":106,"rlc":107,"rvc":108},{"id":26,"tl":null,"tv":null,"plc":109,"pvc":110,"rlc":111,"rvc":112},{"id":27,"tl":null,"tv":null,"plc":113,"pvc":114,"rlc":115,"rvc":116},{"id":28,"tl":null,"tv":null,"plc":117,"pvc":118,"rlc":119,"rvc":120},{"id":29,"tl":null,"tv":null,"plc":122,"pvc":123,"rlc":124,"rvc":125},{"id":30,"tl":null,"tv":null,"plc":126,"pvc":127,"rlc":128,"rvc":129},{"id":31,"tl":null,"tv":null,"plc":130,"pvc":131,"rlc":132,"rvc":133},{"id":32,"tl":null,"tv":null,"plc":134,"pvc":135,"rlc":136,"rvc":137},{"id":33,"tl":null,"tv":null,"plc":139,"pvc":140,"rlc":141,"rvc":142},{"id":34,"tl":null,"tv":null,"plc":143,"pvc":144,"rlc":145,"rvc":146},{"id":35,"tl":null,"tv":null,"plc":147,"pvc":148,"rlc":149,"rvc":150},{"id":36,"tl":null,"tv":null,"plc":151,"pvc":152,"rlc":153,"rvc":154},{"id":37,"tl":null,"tv":null,"plc":156,"pvc":157,"rlc":158,"rvc":159},{"id":38,"tl":null,"tv":null,"plc":160,"pvc":161,"rlc":162,"rvc":163},{"id":39,"tl":null,"tv":null,"plc":164,"pvc":165,"rlc":166,"rvc":167},{"id":40,"tl":null,"tv":null,"plc":168,"pvc":169,"rlc":170,"rvc":171},{"id":41,"tl":null,"tv":null,"plc":173,"pvc":174,"rlc":175,"rvc":176},{"id":42,"tl":null,"tv":null,"plc":177,"pvc":178,"rlc":179,"rvc":180},{"id":43,"tl":null,"tv":null,"plc":181,"pvc":182,"rlc":183,"rvc":184},{"id":44,"tl":null,"tv":null,"plc":185,"pvc":186,"rlc":187,"rvc":188},{"id":45,"tl":null,"tv":null,"plc":190,"pvc":191,"rlc":192,"rvc":193},{"id":46,"tl":null,"tv":null,"plc":194,"pvc":195,"rlc":196,"rvc":197},{"id":47,"tl":null,"tv":null,"plc":198,"pvc":199,"rlc":200,"rvc":201},{"id":48,"tl":null,"tv":null,"plc":202,"pvc":203,"rlc":204,"rvc":205},{"id":49,"tl":null,"tv":null,"plc":207,"pvc":208,"rlc":209,"rvc":210},{"id":50,"tl":null,"tv":null,"plc":211,"pvc":212,"rlc":213,"rvc":214},{"id":51,"tl":null,"tv":null,"plc":215,"pvc":216,"rlc":217,"rvc":218},{"id":52,"tl":null,"tv":null,"plc":219,"pvc":220,"rlc":221,"rvc":222},{"id":53,"tl":null,"tv":null,"plc":223,"pvc":224,"rlc":225,"rvc":226},{"id":54,"tl":null,"tv":null,"plc":227,"pvc":228,"rlc":229,"rvc":230},{"id":55,"tl":null,"tv":null,"plc":232,"pvc":233,"rlc":234,"rvc":235},{"id":56,"tl":null,"tv":null,"plc":236,"pvc":237,"rlc":238,"rvc":239},{"id":57,"tl":null,"tv":null,"plc":240,"pvc":241,"rlc":242,"rvc":243},{"id":58,"tl":null,"tv":null,"plc":244,"pvc":245,"rlc":246,"rvc":247},{"id":59,"tl":null,"tv":null,"plc":248,"pvc":249,"rlc":250,"rvc":251},{"id":60,"tl":null,"tv":null,"plc":252,"pvc":253,"rlc":254,"rvc":255},{"id":61,"tl":null,"tv":null,"plc":257,"pvc":258,"rlc":259,"rvc":260},{"id":62,"tl":null,"tv":null,"plc":261,"pvc":262,"rlc":263,"rvc":264},{"id":63,"tl":null,"tv":null,"plc":265,"pvc":266,"rlc":267,"rvc":268},{"id":64,"tl":null,"tv":null,"plc":269,"pvc":270,"rlc":271,"rvc":272},{"id":65,"tl":null,"tv":null,"plc":273,"pvc":274,"rlc":275,"rvc":276},{"id":66,"tl":null,"tv":null,"plc":277,"pvc":278,"rlc":279,"rvc":280},{"id":67,"tl":null,"tv":null,"plc":282,"pvc":283,"rlc":284,"rvc":285},{"id":68,"tl":null,"tv":null,"plc":286,"pvc":287,"rlc":288,"rvc":289},{"id":69,"tl":null,"tv":null,"plc":290,"pvc":291,"rlc":292,"rvc":293},{"id":70,"tl":null,"tv":null,"plc":294,"pvc":295,"rlc":296,"rvc":297},{"id":71,"tl":null,"tv":null,"plc":298,"pvc":299,"rlc":300,"rvc":301},{"id":72,"tl":null,"tv":null,"plc":302,"pvc":303,"rlc":304,"rvc":305},{"id":73,"tl":null,"tv":null,"plc":307,"pvc":308,"rlc":309,"rvc":310},{"id":74,"tl":null,"tv":null,"plc":312,"pvc":313,"rlc":314,"rvc":315},{"id":75,"tl":null,"tv":null,"plc":316,"pvc":317,"rlc":318,"rvc":319},{"id":76,"tl":null,"tv":null,"plc":320,"pvc":321,"rlc":322,"rvc":323},{"id":77,"tl":null,"tv":null,"plc":325,"pvc":326,"rlc":327,"rvc":328},{"id":78,"tl":null,"tv":null,"plc":329,"pvc":330,"rlc":331,"rvc":332},{"id":79,"tl":null,"tv":null,"plc":333,"pvc":334,"rlc":335,"rvc":336},{"id":80,"tl":null,"tv":null,"plc":338,"pvc":339,"rlc":340,"rvc":341},{"id":81,"tl":null,"tv":null,"plc":342,"pvc":343,"rlc":344,"rvc":345},{"id":82,"tl":null,"tv":null,"plc":346,"pvc":347,"rlc":348,"rvc":349},{"id":83,"tl":null,"tv":null,"plc":351,"pvc":352,"rlc":353,"rvc":354},{"id":84,"tl":null,"tv":null,"plc":355,"pvc":356,"rlc":357,"rvc":358},{"id":85,"tl":null,"tv":null,"plc":359,"pvc":360,"rlc":361,"rvc":362},{"id":86,"tl":null,"tv":null,"plc":364,"pvc":365,"rlc":366,"rvc":367},{"id":87,"tl":null,"tv":null,"plc":368,"pvc":369,"rlc":370,"rvc":371},{"id":88,"tl":null,"tv":null,"plc":372,"pvc":373,"rlc":374,"rvc":375},{"id":89,"tl":null,"tv":null,"plc":377,"pvc":378,"rlc":379,"rvc":380},{"id":90,"tl":null,"tv":null,"plc":381,"pvc":382,"rlc":383,"rvc":384},{"id":91,"tl":null,"tv":null,"plc":386,"pvc":387,"rlc":388,"rvc":389},{"id":92,"tl":null,"tv":null,"plc":390,"pvc":391,"rlc":392,"rvc":393},{"id":93,"tl":null,"tv":null,"plc":395,"pvc":396,"rlc":397,"rvc":398},{"id":94,"tl":null,"tv":null,"plc":399,"pvc":400,"rlc":401,"rvc":402},{"id":95,"tl":null,"tv":null,"plc":404,"pvc":405,"rlc":406,"rvc":407},{"id":96,"tl":null,"tv":null,"plc":408,"pvc":409,"rlc":410,"rvc":411},{"id":97,"tl":null,"tv":null,"plc":413,"pvc":414,"rlc":415,"rvc":416},{"id":98,"tl":null,"tv":null,"plc":418,"pvc":419,"rlc":420,"rvc":421},{"id":99,"tl":null,"tv":null,"plc":423,"pvc":424,"rlc":425,"rvc":426},{"id":100,"tl":null,"tv":null,"plc":427,"pvc":428,"rlc":429,"rvc":430},{"id":101,"tl":null,"tv":null,"plc":432,"pvc":433,"rlc":434,"rvc":435},{"id":102,"tl":null,"tv":null,"plc":437,"pvc":438,"rlc":439,"rvc":440},{"id":103,"tl":null,"tv":null,"plc":442,"pvc":443,"rlc":444,"rvc":445},{"id":104,"tl":null,"tv":null,"plc":447,"pvc":448,"rlc":449,"rvc":450}];
+// ── DATOS INYECTADOS POR generar_pagina.py ─────────────────
+// ── DATOS PRECOMPUTADOS (generados por generar_pagina.py) ──
+const LAST_UPDATE = "11 Jun 2026, 13:49";
+const PLAYED      = 2;
+const PENDING     = 102;
+const PM          = [{"id": 1, "tl": "Mexico", "tv": "Sudafrica", "plc": 2, "pvc": 3, "rlc": 4, "rvc": 5, "rl": 0, "rv": 0}, {"id": 2, "tl": "Corea", "tv": "R. Checa", "plc": 6, "pvc": 7, "rlc": 8, "rvc": 9, "rl": 2, "rv": 1}, {"id": 3, "tl": null, "tv": null, "plc": 11, "pvc": 12, "rlc": 13, "rvc": 14, "rl": null, "rv": null}, {"id": 4, "tl": null, "tv": null, "plc": 15, "pvc": 16, "rlc": 17, "rvc": 18, "rl": 3, "rv": 2}, {"id": 5, "tl": null, "tv": null, "plc": 20, "pvc": 21, "rlc": 22, "rvc": 23, "rl": null, "rv": null}, {"id": 6, "tl": null, "tv": null, "plc": 24, "pvc": 25, "rlc": 26, "rvc": 27, "rl": null, "rv": null}, {"id": 7, "tl": null, "tv": null, "plc": 28, "pvc": 29, "rlc": 30, "rvc": 31, "rl": null, "rv": null}, {"id": 8, "tl": null, "tv": null, "plc": 32, "pvc": 33, "rlc": 34, "rvc": 35, "rl": null, "rv": null}, {"id": 9, "tl": null, "tv": null, "plc": 37, "pvc": 38, "rlc": 39, "rvc": 40, "rl": null, "rv": null}, {"id": 10, "tl": null, "tv": null, "plc": 41, "pvc": 42, "rlc": 43, "rvc": 44, "rl": null, "rv": null}, {"id": 11, "tl": null, "tv": null, "plc": 45, "pvc": 46, "rlc": 47, "rvc": 48, "rl": null, "rv": null}, {"id": 12, "tl": null, "tv": null, "plc": 49, "pvc": 50, "rlc": 51, "rvc": 52, "rl": null, "rv": null}, {"id": 13, "tl": null, "tv": null, "plc": 54, "pvc": 55, "rlc": 56, "rvc": 57, "rl": null, "rv": null}, {"id": 14, "tl": null, "tv": null, "plc": 58, "pvc": 59, "rlc": 60, "rvc": 61, "rl": null, "rv": null}, {"id": 15, "tl": null, "tv": null, "plc": 62, "pvc": 63, "rlc": 64, "rvc": 65, "rl": null, "rv": null}, {"id": 16, "tl": null, "tv": null, "plc": 66, "pvc": 67, "rlc": 68, "rvc": 69, "rl": null, "rv": null}, {"id": 17, "tl": null, "tv": null, "plc": 71, "pvc": 72, "rlc": 73, "rvc": 74, "rl": null, "rv": null}, {"id": 18, "tl": null, "tv": null, "plc": 75, "pvc": 76, "rlc": 77, "rvc": 78, "rl": null, "rv": null}, {"id": 19, "tl": null, "tv": null, "plc": 79, "pvc": 80, "rlc": 81, "rvc": 82, "rl": null, "rv": null}, {"id": 20, "tl": null, "tv": null, "plc": 83, "pvc": 84, "rlc": 85, "rvc": 86, "rl": null, "rv": null}, {"id": 21, "tl": null, "tv": null, "plc": 88, "pvc": 89, "rlc": 90, "rvc": 91, "rl": null, "rv": null}, {"id": 22, "tl": null, "tv": null, "plc": 92, "pvc": 93, "rlc": 94, "rvc": 95, "rl": null, "rv": null}, {"id": 23, "tl": null, "tv": null, "plc": 96, "pvc": 97, "rlc": 98, "rvc": 99, "rl": null, "rv": null}, {"id": 24, "tl": null, "tv": null, "plc": 100, "pvc": 101, "rlc": 102, "rvc": 103, "rl": null, "rv": null}, {"id": 25, "tl": null, "tv": null, "plc": 105, "pvc": 106, "rlc": 107, "rvc": 108, "rl": null, "rv": null}, {"id": 26, "tl": null, "tv": null, "plc": 109, "pvc": 110, "rlc": 111, "rvc": 112, "rl": null, "rv": null}, {"id": 27, "tl": null, "tv": null, "plc": 113, "pvc": 114, "rlc": 115, "rvc": 116, "rl": null, "rv": null}, {"id": 28, "tl": null, "tv": null, "plc": 117, "pvc": 118, "rlc": 119, "rvc": 120, "rl": null, "rv": null}, {"id": 29, "tl": null, "tv": null, "plc": 122, "pvc": 123, "rlc": 124, "rvc": 125, "rl": null, "rv": null}, {"id": 30, "tl": null, "tv": null, "plc": 126, "pvc": 127, "rlc": 128, "rvc": 129, "rl": null, "rv": null}, {"id": 31, "tl": null, "tv": null, "plc": 130, "pvc": 131, "rlc": 132, "rvc": 133, "rl": null, "rv": null}, {"id": 32, "tl": null, "tv": null, "plc": 134, "pvc": 135, "rlc": 136, "rvc": 137, "rl": null, "rv": null}, {"id": 33, "tl": null, "tv": null, "plc": 139, "pvc": 140, "rlc": 141, "rvc": 142, "rl": null, "rv": null}, {"id": 34, "tl": null, "tv": null, "plc": 143, "pvc": 144, "rlc": 145, "rvc": 146, "rl": null, "rv": null}, {"id": 35, "tl": null, "tv": null, "plc": 147, "pvc": 148, "rlc": 149, "rvc": 150, "rl": null, "rv": null}, {"id": 36, "tl": null, "tv": null, "plc": 151, "pvc": 152, "rlc": 153, "rvc": 154, "rl": null, "rv": null}, {"id": 37, "tl": null, "tv": null, "plc": 156, "pvc": 157, "rlc": 158, "rvc": 159, "rl": null, "rv": null}, {"id": 38, "tl": null, "tv": null, "plc": 160, "pvc": 161, "rlc": 162, "rvc": 163, "rl": null, "rv": null}, {"id": 39, "tl": null, "tv": null, "plc": 164, "pvc": 165, "rlc": 166, "rvc": 167, "rl": null, "rv": null}, {"id": 40, "tl": null, "tv": null, "plc": 168, "pvc": 169, "rlc": 170, "rvc": 171, "rl": null, "rv": null}, {"id": 41, "tl": null, "tv": null, "plc": 173, "pvc": 174, "rlc": 175, "rvc": 176, "rl": null, "rv": null}, {"id": 42, "tl": null, "tv": null, "plc": 177, "pvc": 178, "rlc": 179, "rvc": 180, "rl": null, "rv": null}, {"id": 43, "tl": null, "tv": null, "plc": 181, "pvc": 182, "rlc": 183, "rvc": 184, "rl": null, "rv": null}, {"id": 44, "tl": null, "tv": null, "plc": 185, "pvc": 186, "rlc": 187, "rvc": 188, "rl": null, "rv": null}, {"id": 45, "tl": null, "tv": null, "plc": 190, "pvc": 191, "rlc": 192, "rvc": 193, "rl": null, "rv": null}, {"id": 46, "tl": null, "tv": null, "plc": 194, "pvc": 195, "rlc": 196, "rvc": 197, "rl": null, "rv": null}, {"id": 47, "tl": null, "tv": null, "plc": 198, "pvc": 199, "rlc": 200, "rvc": 201, "rl": null, "rv": null}, {"id": 48, "tl": null, "tv": null, "plc": 202, "pvc": 203, "rlc": 204, "rvc": 205, "rl": null, "rv": null}, {"id": 49, "tl": null, "tv": null, "plc": 207, "pvc": 208, "rlc": 209, "rvc": 210, "rl": null, "rv": null}, {"id": 50, "tl": null, "tv": null, "plc": 211, "pvc": 212, "rlc": 213, "rvc": 214, "rl": null, "rv": null}, {"id": 51, "tl": null, "tv": null, "plc": 215, "pvc": 216, "rlc": 217, "rvc": 218, "rl": null, "rv": null}, {"id": 52, "tl": null, "tv": null, "plc": 219, "pvc": 220, "rlc": 221, "rvc": 222, "rl": null, "rv": null}, {"id": 53, "tl": null, "tv": null, "plc": 223, "pvc": 224, "rlc": 225, "rvc": 226, "rl": null, "rv": null}, {"id": 54, "tl": null, "tv": null, "plc": 227, "pvc": 228, "rlc": 229, "rvc": 230, "rl": null, "rv": null}, {"id": 55, "tl": null, "tv": null, "plc": 232, "pvc": 233, "rlc": 234, "rvc": 235, "rl": null, "rv": null}, {"id": 56, "tl": null, "tv": null, "plc": 236, "pvc": 237, "rlc": 238, "rvc": 239, "rl": null, "rv": null}, {"id": 57, "tl": null, "tv": null, "plc": 240, "pvc": 241, "rlc": 242, "rvc": 243, "rl": null, "rv": null}, {"id": 58, "tl": null, "tv": null, "plc": 244, "pvc": 245, "rlc": 246, "rvc": 247, "rl": null, "rv": null}, {"id": 59, "tl": null, "tv": null, "plc": 248, "pvc": 249, "rlc": 250, "rvc": 251, "rl": null, "rv": null}, {"id": 60, "tl": null, "tv": null, "plc": 252, "pvc": 253, "rlc": 254, "rvc": 255, "rl": null, "rv": null}, {"id": 61, "tl": null, "tv": null, "plc": 257, "pvc": 258, "rlc": 259, "rvc": 260, "rl": null, "rv": null}, {"id": 62, "tl": null, "tv": null, "plc": 261, "pvc": 262, "rlc": 263, "rvc": 264, "rl": null, "rv": null}, {"id": 63, "tl": null, "tv": null, "plc": 265, "pvc": 266, "rlc": 267, "rvc": 268, "rl": null, "rv": null}, {"id": 64, "tl": null, "tv": null, "plc": 269, "pvc": 270, "rlc": 271, "rvc": 272, "rl": null, "rv": null}, {"id": 65, "tl": null, "tv": null, "plc": 273, "pvc": 274, "rlc": 275, "rvc": 276, "rl": null, "rv": null}, {"id": 66, "tl": null, "tv": null, "plc": 277, "pvc": 278, "rlc": 279, "rvc": 280, "rl": null, "rv": null}, {"id": 67, "tl": null, "tv": null, "plc": 282, "pvc": 283, "rlc": 284, "rvc": 285, "rl": null, "rv": null}, {"id": 68, "tl": null, "tv": null, "plc": 286, "pvc": 287, "rlc": 288, "rvc": 289, "rl": null, "rv": null}, {"id": 69, "tl": null, "tv": null, "plc": 290, "pvc": 291, "rlc": 292, "rvc": 293, "rl": null, "rv": null}, {"id": 70, "tl": null, "tv": null, "plc": 294, "pvc": 295, "rlc": 296, "rvc": 297, "rl": null, "rv": null}, {"id": 71, "tl": null, "tv": null, "plc": 298, "pvc": 299, "rlc": 300, "rvc": 301, "rl": null, "rv": null}, {"id": 72, "tl": null, "tv": null, "plc": 302, "pvc": 303, "rlc": 304, "rvc": 305, "rl": null, "rv": null}, {"id": 73, "tl": null, "tv": null, "plc": 307, "pvc": 308, "rlc": 309, "rvc": 310, "rl": null, "rv": null}, {"id": 74, "tl": null, "tv": null, "plc": 312, "pvc": 313, "rlc": 314, "rvc": 315, "rl": null, "rv": null}, {"id": 75, "tl": null, "tv": null, "plc": 316, "pvc": 317, "rlc": 318, "rvc": 319, "rl": null, "rv": null}, {"id": 76, "tl": null, "tv": null, "plc": 320, "pvc": 321, "rlc": 322, "rvc": 323, "rl": null, "rv": null}, {"id": 77, "tl": null, "tv": null, "plc": 325, "pvc": 326, "rlc": 327, "rvc": 328, "rl": null, "rv": null}, {"id": 78, "tl": null, "tv": null, "plc": 329, "pvc": 330, "rlc": 331, "rvc": 332, "rl": null, "rv": null}, {"id": 79, "tl": null, "tv": null, "plc": 333, "pvc": 334, "rlc": 335, "rvc": 336, "rl": null, "rv": null}, {"id": 80, "tl": null, "tv": null, "plc": 338, "pvc": 339, "rlc": 340, "rvc": 341, "rl": null, "rv": null}, {"id": 81, "tl": null, "tv": null, "plc": 342, "pvc": 343, "rlc": 344, "rvc": 345, "rl": null, "rv": null}, {"id": 82, "tl": null, "tv": null, "plc": 346, "pvc": 347, "rlc": 348, "rvc": 349, "rl": null, "rv": null}, {"id": 83, "tl": null, "tv": null, "plc": 351, "pvc": 352, "rlc": 353, "rvc": 354, "rl": null, "rv": null}, {"id": 84, "tl": null, "tv": null, "plc": 355, "pvc": 356, "rlc": 357, "rvc": 358, "rl": null, "rv": null}, {"id": 85, "tl": null, "tv": null, "plc": 359, "pvc": 360, "rlc": 361, "rvc": 362, "rl": null, "rv": null}, {"id": 86, "tl": null, "tv": null, "plc": 364, "pvc": 365, "rlc": 366, "rvc": 367, "rl": null, "rv": null}, {"id": 87, "tl": null, "tv": null, "plc": 368, "pvc": 369, "rlc": 370, "rvc": 371, "rl": null, "rv": null}, {"id": 88, "tl": null, "tv": null, "plc": 372, "pvc": 373, "rlc": 374, "rvc": 375, "rl": null, "rv": null}, {"id": 89, "tl": null, "tv": null, "plc": 377, "pvc": 378, "rlc": 379, "rvc": 380, "rl": null, "rv": null}, {"id": 90, "tl": null, "tv": null, "plc": 381, "pvc": 382, "rlc": 383, "rvc": 384, "rl": null, "rv": null}, {"id": 91, "tl": null, "tv": null, "plc": 386, "pvc": 387, "rlc": 388, "rvc": 389, "rl": null, "rv": null}, {"id": 92, "tl": null, "tv": null, "plc": 390, "pvc": 391, "rlc": 392, "rvc": 393, "rl": null, "rv": null}, {"id": 93, "tl": null, "tv": null, "plc": 395, "pvc": 396, "rlc": 397, "rvc": 398, "rl": null, "rv": null}, {"id": 94, "tl": null, "tv": null, "plc": 399, "pvc": 400, "rlc": 401, "rvc": 402, "rl": null, "rv": null}, {"id": 95, "tl": null, "tv": null, "plc": 404, "pvc": 405, "rlc": 406, "rvc": 407, "rl": null, "rv": null}, {"id": 96, "tl": null, "tv": null, "plc": 408, "pvc": 409, "rlc": 410, "rvc": 411, "rl": null, "rv": null}, {"id": 97, "tl": null, "tv": null, "plc": 413, "pvc": 414, "rlc": 415, "rvc": 416, "rl": null, "rv": null}, {"id": 98, "tl": null, "tv": null, "plc": 418, "pvc": 419, "rlc": 420, "rvc": 421, "rl": null, "rv": null}, {"id": 99, "tl": null, "tv": null, "plc": 423, "pvc": 424, "rlc": 425, "rvc": 426, "rl": null, "rv": null}, {"id": 100, "tl": null, "tv": null, "plc": 427, "pvc": 428, "rlc": 429, "rvc": 430, "rl": null, "rv": null}, {"id": 101, "tl": null, "tv": null, "plc": 432, "pvc": 433, "rlc": 434, "rvc": 435, "rl": null, "rv": null}, {"id": 102, "tl": null, "tv": null, "plc": 437, "pvc": 438, "rlc": 439, "rvc": 440, "rl": null, "rv": null}, {"id": 103, "tl": null, "tv": null, "plc": 442, "pvc": 443, "rlc": 444, "rvc": 445, "rl": null, "rv": null}, {"id": 104, "tl": null, "tv": null, "plc": 447, "pvc": 448, "rlc": 449, "rvc": 450, "rl": null, "rv": null}];
+const IP          = {"Michael Letrado": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Mbappe", "asistente": "Bruno Fernandez", "gol_grupos": "Cristiano Ronaldo", "mejor_equipo": "Belgica"}, "Sergio Echeverria": {"campeon": "Francia", "goleador": "Luis Suarez", "mvp": "Luis Diaz", "asistente": "James Rodriguez", "gol_grupos": "Luis Diaz", "mejor_equipo": "Colombia"}, "Gabriel Letrado": {"campeon": "Francia", "goleador": "Harry Kane", "mvp": "Mbappe", "asistente": "Yamal", "gol_grupos": "Mbappe", "mejor_equipo": "Argentina"}, "Javier Adames": {"campeon": "España", "goleador": "Mbappe", "mvp": "Olise", "asistente": "Yamal", "gol_grupos": "Mbappe", "mejor_equipo": "España"}, "Edward Rios": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Mbappe", "asistente": "Musiala", "gol_grupos": "Cristiano Ronaldo", "mejor_equipo": "España"}, "Karen Vargas": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Mbappe", "mejor_equipo": "España"}, "Monica Marin": {"campeon": "España", "goleador": "Harry Kane", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Harry Kane", "mejor_equipo": "Argentina"}, "Cesar Letrado": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Mbappe", "mejor_equipo": "España"}, "Kevin Ravelo": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Harry Kane", "mejor_equipo": "Argentina"}, "Mateo Salamanca": {"campeon": "España", "goleador": "Harry Kane", "mvp": "Yamal", "asistente": "Pedri", "gol_grupos": "Julian Alvarez", "mejor_equipo": "Argentina"}, "Esmeralda Rueda": {"campeon": "España", "goleador": "Harry Kane", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Lautaro Martinez", "mejor_equipo": "Argentina"}, "Julian Rodriguez": {"campeon": "Brasil", "goleador": "Haaland", "mvp": "Raphina", "asistente": "James Rodriguez", "gol_grupos": "Lautaro Martinez", "mejor_equipo": "Brasil"}, "Diego Marin": {"campeon": "Francia", "goleador": "Haaland", "mvp": "Mbappe", "asistente": "Yamal", "gol_grupos": "Lautaro Martinez", "mejor_equipo": "España"}, "Samuel Ramirez": {"campeon": "Inglaterra", "goleador": "Harry Kane", "mvp": "Bruno Fernandez", "asistente": "Bruno Fernandez", "gol_grupos": "Haaland", "mejor_equipo": "Colombia"}, "Cristian Godoy": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Olise", "gol_grupos": "Raphinha", "mejor_equipo": "Brasil"}, "Peter Letrado": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Mbappe", "asistente": "Olise", "gol_grupos": "Messi", "mejor_equipo": "Argentina"}, "Nicolas Letrado": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Harry Kane", "mejor_equipo": "España"}, "Orlando Narvaez": {"campeon": "España", "goleador": "Havertz", "mvp": "Pedri", "asistente": "Messi", "gol_grupos": "Havertz", "mejor_equipo": "Argentina"}, "Andres Castro": {"campeon": "España", "goleador": "Harry Kane", "mvp": "Yamal", "asistente": "Musiala", "gol_grupos": "Mbappe", "mejor_equipo": "Francia"}, "Fredy Hernandez": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Doue", "asistente": "De Bruyne", "gol_grupos": "Harry Kane", "mejor_equipo": "Argentina"}, "Sneyder Bonilla": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Olise", "gol_grupos": "Lautaro Martinez", "mejor_equipo": "Argentina"}, "Yury Romero": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Olise", "gol_grupos": "Harry Kane", "mejor_equipo": "España"}, "Juan Moreno": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Olise", "asistente": "Musiala", "gol_grupos": "Luis Diaz", "mejor_equipo": "Brasil"}, "Oscar Letrado": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Messi", "gol_grupos": "Julian Alvarez", "mejor_equipo": "Francia"}, "Juan Merchan": {"campeon": "Francia", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Olise", "gol_grupos": "Dembele", "mejor_equipo": "Alemania"}, "Abraham Ramirez": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Messi", "gol_grupos": "Julian Alvarez", "mejor_equipo": "Belgica"}, "Juan Naranjo": {"campeon": "España", "goleador": "Harry Kane", "mvp": "Mbappe", "asistente": "Cherki", "gol_grupos": "Mbappe", "mejor_equipo": "Argentina"}, "Felipe Higuita": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Yamal", "gol_grupos": "Harry Kane", "mejor_equipo": "Inglaterra"}, "Mariana Letrado": {"campeon": "España", "goleador": "Harry Kane", "mvp": "Yamal", "asistente": "Bruno Fernandez", "gol_grupos": "Harry Kane", "mejor_equipo": "Paises Bajos"}, "Dilan Buitrago": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Bruno Fernandez", "gol_grupos": "Mbappe", "mejor_equipo": "España"}, "Deivyd Ramirez": {"campeon": "España", "goleador": "Mbappe", "mvp": "Yamal", "asistente": "Bruno Fernandez", "gol_grupos": "Mbappe", "mejor_equipo": "España"}, "Fredy Letrado": {"campeon": "Argentina", "goleador": "Mbappe", "mvp": "Messi", "asistente": "Messi", "gol_grupos": "Mbappe", "mejor_equipo": "Francia"}};
 
-// Predicciones iniciales (orden = mismo orden que RESULTADOS fila 4-35)
-const IP={"Michael Letrado":{"campeon":"Francia","goleador":"Mbappe","mvp":"Mbappe","asistente":"Bruno Fernandez","gol_grupos":"Cristiano Ronaldo","mejor_equipo":"Belgica"},"Sergio Echeverria":{"campeon":"Francia","goleador":"Luis Suarez","mvp":"Luis Diaz","asistente":"James Rodriguez","gol_grupos":"Luis Diaz","mejor_equipo":"Colombia"},"Gabriel Letrado":{"campeon":"Francia","goleador":"Harry Kane","mvp":"Mbappe","asistente":"Yamal","gol_grupos":"Mbappe","mejor_equipo":"Argentina"},"Javier Adames":{"campeon":"España","goleador":"Mbappe","mvp":"Olise","asistente":"Yamal","gol_grupos":"Mbappe","mejor_equipo":"España"},"Edward Rios":{"campeon":"Francia","goleador":"Mbappe","mvp":"Mbappe","asistente":"Musiala","gol_grupos":"Cristiano Ronaldo","mejor_equipo":"España"},"Karen Vargas":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Mbappe","mejor_equipo":"España"},"Monica Marin":{"campeon":"España","goleador":"Harry Kane","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Harry Kane","mejor_equipo":"Argentina"},"Cesar Letrado":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Mbappe","mejor_equipo":"España"},"Kevin Ravelo":{"campeon":"Francia","goleador":"Mbappe","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Harry Kane","mejor_equipo":"Argentina"},"Mateo Salamanca":{"campeon":"España","goleador":"Harry Kane","mvp":"Yamal","asistente":"Pedri","gol_grupos":"Julian Alvarez","mejor_equipo":"Argentina"},"Esmeralda Rueda":{"campeon":"España","goleador":"Harry Kane","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Lautaro Martinez","mejor_equipo":"Argentina"},"Julian Rodriguez":{"campeon":"Brasil","goleador":"Haaland","mvp":"Raphina","asistente":"James Rodriguez","gol_grupos":"Lautaro Martinez","mejor_equipo":"Brasil"},"Diego Marin":{"campeon":"Francia","goleador":"Haaland","mvp":"Mbappe","asistente":"Yamal","gol_grupos":"Lautaro Martinez","mejor_equipo":"España"},"Samuel Ramirez":{"campeon":"Inglaterra","goleador":"Harry Kane","mvp":"Bruno Fernandez","asistente":"Bruno Fernandez","gol_grupos":"Haaland","mejor_equipo":"Colombia"},"Cristian Godoy":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Olise","gol_grupos":"Raphinha","mejor_equipo":"Brasil"},"Peter Letrado":{"campeon":"Francia","goleador":"Mbappe","mvp":"Mbappe","asistente":"Olise","gol_grupos":"Messi","mejor_equipo":"Argentina"},"Nicolas Letrado":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Harry Kane","mejor_equipo":"España"},"Orlando Narvaez":{"campeon":"España","goleador":"Havertz","mvp":"Pedri","asistente":"Messi","gol_grupos":"Havertz","mejor_equipo":"Argentina"},"Andres Castro":{"campeon":"España","goleador":"Harry Kane","mvp":"Yamal","asistente":"Musiala","gol_grupos":"Mbappe","mejor_equipo":"Francia"},"Fredy Hernandez":{"campeon":"Francia","goleador":"Mbappe","mvp":"Doue","asistente":"De Bruyne","gol_grupos":"Harry Kane","mejor_equipo":"Argentina"},"Sneyder Bonilla":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Olise","gol_grupos":"Lautaro Martinez","mejor_equipo":"Argentina"},"Yury Romero":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Olise","gol_grupos":"Harry Kane","mejor_equipo":"España"},"Juan Moreno":{"campeon":"Francia","goleador":"Mbappe","mvp":"Olise","asistente":"Musiala","gol_grupos":"Luis Diaz","mejor_equipo":"Brasil"},"Oscar Letrado":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Messi","gol_grupos":"Julian Alvarez","mejor_equipo":"Francia"},"Juan Merchan":{"campeon":"Francia","goleador":"Mbappe","mvp":"Yamal","asistente":"Olise","gol_grupos":"Dembele","mejor_equipo":"Alemania"},"Abraham Ramirez":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Messi","gol_grupos":"Julian Alvarez","mejor_equipo":"Belgica"},"Juan Naranjo":{"campeon":"España","goleador":"Harry Kane","mvp":"Mbappe","asistente":"Cherki","gol_grupos":"Mbappe","mejor_equipo":"Argentina"},"Felipe Higuita":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Yamal","gol_grupos":"Harry Kane","mejor_equipo":"Inglaterra"},"Mariana Letrado":{"campeon":"España","goleador":"Harry Kane","mvp":"Yamal","asistente":"Bruno Fernandez","gol_grupos":"Harry Kane","mejor_equipo":"Paises Bajos"},"Dilan Buitrago":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Bruno Fernandez","gol_grupos":"Mbappe","mejor_equipo":"España"},"Deivyd Ramirez":{"campeon":"España","goleador":"Mbappe","mvp":"Yamal","asistente":"Bruno Fernandez","gol_grupos":"Mbappe","mejor_equipo":"España"},"Fredy Letrado":{"campeon":"Argentina","goleador":"Mbappe","mvp":"Messi","asistente":"Messi","gol_grupos":"Mbappe","mejor_equipo":"Francia"}};
+// Pronósticos, posiciones e historial ya calculados desde el Excel
+const PRECOMP = {
+  standings: [{"name": "Edward Rios", "pts": 6, "rank": 1}, {"name": "Diego Marin", "pts": 6, "rank": 2}, {"name": "Samuel Ramirez", "pts": 6, "rank": 3}, {"name": "Fredy Hernandez", "pts": 6, "rank": 4}, {"name": "Sneyder Bonilla", "pts": 6, "rank": 5}, {"name": "Yury Romero", "pts": 6, "rank": 6}, {"name": "Juan Naranjo", "pts": 6, "rank": 7}, {"name": "Felipe Higuita", "pts": 6, "rank": 8}, {"name": "Karen Vargas", "pts": 5, "rank": 9}, {"name": "Monica Marin", "pts": 5, "rank": 10}, {"name": "Cesar Letrado", "pts": 5, "rank": 11}, {"name": "Mateo Salamanca", "pts": 5, "rank": 12}, {"name": "Deivyd Ramirez", "pts": 5, "rank": 13}, {"name": "Sergio Echeverria", "pts": 4, "rank": 14}, {"name": "Esmeralda Rueda", "pts": 4, "rank": 15}, {"name": "Cristian Godoy", "pts": 4, "rank": 16}, {"name": "Michael Letrado", "pts": 2, "rank": 17}, {"name": "Gabriel Letrado", "pts": 2, "rank": 18}, {"name": "Javier Adames", "pts": 2, "rank": 19}, {"name": "Kevin Ravelo", "pts": 2, "rank": 20}, {"name": "Peter Letrado", "pts": 2, "rank": 21}, {"name": "Nicolas Letrado", "pts": 2, "rank": 22}, {"name": "Andres Castro", "pts": 2, "rank": 23}, {"name": "Abraham Ramirez", "pts": 2, "rank": 24}, {"name": "Dilan Buitrago", "pts": 2, "rank": 25}, {"name": "Orlando Narvaez", "pts": 1, "rank": 26}, {"name": "Juan Moreno", "pts": 1, "rank": 27}, {"name": "Juan Merchan", "pts": 1, "rank": 28}, {"name": "Fredy Letrado", "pts": 1, "rank": 29}, {"name": "Julian Rodriguez", "pts": 0, "rank": 30}, {"name": "Oscar Letrado", "pts": 0, "rank": 31}, {"name": "Mariana Letrado", "pts": 0, "rank": 32}],
+  pronos:    {"Michael Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Sergio Echeverria": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 3, "pv": 1, "rl": 2, "rv": 1, "pts": 4}], "Gabriel Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Javier Adames": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Edward Rios": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Karen Vargas": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Monica Marin": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Cesar Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 1, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 0, "rl": 2, "rv": 1, "pts": 4}], "Kevin Ravelo": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 1, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Mateo Salamanca": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Esmeralda Rueda": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 0, "rl": 2, "rv": 1, "pts": 4}], "Julian Rodriguez": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 2, "rl": 2, "rv": 1, "pts": 0}], "Diego Marin": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Samuel Ramirez": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Cristian Godoy": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 0, "rl": 2, "rv": 1, "pts": 4}], "Peter Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Nicolas Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Orlando Narvaez": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 0, "pv": 2, "rl": 2, "rv": 1, "pts": 0}], "Andres Castro": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Fredy Hernandez": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Sneyder Bonilla": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 1, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Yury Romero": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 1, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Juan Moreno": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Oscar Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 2, "rl": 2, "rv": 1, "pts": 0}], "Juan Merchan": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 2, "rl": 2, "rv": 1, "pts": 1}], "Abraham Ramirez": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Juan Naranjo": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 3, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Felipe Higuita": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 1, "pv": 1, "rl": 0, "rv": 0, "pts": 3}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 0, "rl": 2, "rv": 1, "pts": 3}], "Mariana Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 2, "rl": 2, "rv": 1, "pts": 0}], "Dilan Buitrago": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 0, "rl": 0, "rv": 0, "pts": 1}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 0, "pv": 1, "rl": 2, "rv": 1, "pts": 1}], "Deivyd Ramirez": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 2, "pv": 1, "rl": 2, "rv": 1, "pts": 5}], "Fredy Letrado": [{"pid": 1, "tl": "Mexico", "tv": "Sudafrica", "pl": 2, "pv": 1, "rl": 0, "rv": 0, "pts": 0}, {"pid": 2, "tl": "Corea", "tv": "R. Checa", "pl": 1, "pv": 1, "rl": 2, "rv": 1, "pts": 1}]},
+  history:   [{"label": "J1", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J2", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J3", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J4", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J5", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J6", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J7", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J8", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J9", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J10", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J11", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J12", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J13", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J14", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J15", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J16", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J17", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J18", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J19", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J20", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J21", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J22", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J23", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J24", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J25", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J26", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J27", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J28", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J29", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J30", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J31", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J32", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J33", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}, {"label": "J34", "pts": {"Michael Letrado": 2, "Sergio Echeverria": 4, "Gabriel Letrado": 2, "Javier Adames": 2, "Edward Rios": 6, "Karen Vargas": 5, "Monica Marin": 5, "Cesar Letrado": 5, "Kevin Ravelo": 2, "Mateo Salamanca": 5, "Esmeralda Rueda": 4, "Julian Rodriguez": 0, "Diego Marin": 6, "Samuel Ramirez": 6, "Cristian Godoy": 4, "Peter Letrado": 2, "Nicolas Letrado": 2, "Orlando Narvaez": 1, "Andres Castro": 2, "Fredy Hernandez": 6, "Sneyder Bonilla": 6, "Yury Romero": 6, "Juan Moreno": 1, "Oscar Letrado": 0, "Juan Merchan": 1, "Abraham Ramirez": 2, "Juan Naranjo": 6, "Felipe Higuita": 6, "Mariana Letrado": 0, "Dilan Buitrago": 2, "Deivyd Ramirez": 5, "Fredy Letrado": 1}}],
+};
+
 
 // ── ESTADO ─────────────────────────────────────────────────
-// prevStandings: ranking de la carga anterior para calcular ▲▼
-// history: [{label, pts:{name:pts}}] para gráfica de evolución
-let ST={standings:[],pronos:{},partidos:[],loaded:false,prevStandings:[],history:[]};
+let ST = {
+  standings:     PRECOMP.standings,
+  pronos:        PRECOMP.pronos,
+  partidos:      PM.filter(p => p.tl),
+  history:       PRECOMP.history,
+  prevStandings: [],
+  loaded:        true,
+};
 
-// ── SCORING ────────────────────────────────────────────────
-function scorePts(pl,pv,rl,rv){
-  if(pl==null||pv==null||rl==null||rv==null)return null;
-  pl=+pl; pv=+pv; rl=+rl; rv=+rv;
-  if(isNaN(pl+pv+rl+rv))return null;
-  if(pl===rl&&pv===rv)return 5;
-  const sp=Math.sign(pl-pv), sr=Math.sign(rl-rv);
-  if(sp===sr)return(pl===rl||pv===rv)?4:3;
-  return(pl===rl||pv===rv)?1:0;
-}
-
-// ── EXCEL READER ───────────────────────────────────────────
-// Reads a cell value by 1-indexed Excel row/col from a SheetJS worksheet
-function cv(ws, row, col){
-  const addr = XLSX.utils.encode_cell({r: row-1, c: col-1});
-  const cell = ws[addr];
-  if(!cell) return null;
-  // Return the value: for formula cells SheetJS returns cached result in .v
-  return (cell.v !== undefined && cell.v !== null) ? cell.v : null;
-}
-function cvNum(ws, row, col){
-  const v = cv(ws, row, col);
-  if(v === null || v === '') return null;
-  const n = +v;
-  return isNaN(n) ? null : n;
-}
-function cvStr(ws, row, col){
-  const v = cv(ws, row, col);
-  return (v !== null && v !== undefined && v !== '') ? String(v).trim() : null;
-}
-
-function loadExcel(input){
-  const file = input.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try{
-      // cellFormula:false = don't parse formula strings, use cached values
-      const wb = XLSX.read(e.target.result, {type:'array', cellFormula:false});
-      const wsR = wb.Sheets['RESULTADOS'];
-      if(!wsR) throw new Error('No encontré la hoja RESULTADOS en el archivo');
-
-      // ── Enrich partido map with team names (row 3) and official results (row 2)
-      const enriched = PM.map(p => {
-        // Team names from row 3
-        let tl = cvStr(wsR, 3, p.plc) || p.tl;
-        let tv = cvStr(wsR, 3, p.pvc) || p.tv;
-        if(tl === 'Puntos') tl = p.tl;
-        if(tv === 'Puntos') tv = p.tv;
-        // Official results from row 2
-        const rl = cvNum(wsR, 2, p.rlc);
-        const rv = cvNum(wsR, 2, p.rvc);
-        return {...p, tl, tv, rl, rv};
-      });
-
-      // ── Read participant names and pronos from rows 4-35
-      const partRows = [];
-      for(let r = 4; r <= 35; r++){
-        const name = cvStr(wsR, r, 1);  // col A = col 1
-        if(name) partRows.push({name, row: r});
-      }
-
-      // ── Compute pronos + total points per participant
-      const pronos = {}, totalPts = {};
-      partRows.forEach(({name, row}) => {
-        pronos[name] = [];
-        totalPts[name] = 0;
-        enriched.forEach(p => {
-          if(!p.tl) return;  // skip partidos without team names yet
-          const pl = cvNum(wsR, row, p.plc);
-          const pv = cvNum(wsR, row, p.pvc);
-          const score = scorePts(pl, pv, p.rl, p.rv);
-          pronos[name].push({pid:p.id, tl:p.tl, tv:p.tv, pl, pv, rl:p.rl, rv:p.rv, pts:score});
-          if(score !== null) totalPts[name] += score;
-        });
-      });
-
-      // ── Build sorted standings
-      const standings = partRows
-        .map(({name}) => ({name, pts: totalPts[name] || 0}))
-        .sort((a,b) => b.pts - a.pts)
-        .map((s,i) => ({...s, rank: i+1}));
-
-      // ── History: compute per-jornada cumulative pts
-      // Each jornada groups partidos by the "Puntaje de la jornada" aggregation col
-      // We approximate jornadas by splitting pronos by blocks (jornada cols in Excel)
-      // Simple approach: group partidos sequentially into jornadas of ~4 partidos each
-      // using the partition defined by the PARTIDOS_MAP jornada structure
-      // For now we store one snapshot per Excel upload (each upload = one jornada end)
-      const prevHistory = ST.history || [];
-      const jornadaLabel = `J${prevHistory.length + 1}`;
-      const ptsByName = {};
-      partRows.forEach(({name}) => { ptsByName[name] = totalPts[name] || 0; });
-      const newHistory = [...prevHistory, {label: jornadaLabel, pts: ptsByName}];
-
-      // ── Update state
-      const played = enriched.filter(p => p.tl && p.rl !== null).length;
-      const withTeams = enriched.filter(p => p.tl).length;
-      const prevStandings = ST.standings.length ? ST.standings : [];
-      ST = {standings, pronos, partidos: enriched.filter(p=>p.tl),
-            loaded:true, prevStandings, history: newHistory};
-      document.getElementById('stat-played').textContent = played;
-      document.getElementById('stat-pending').textContent = 104 - played;
-      document.getElementById('header-sub').textContent =
-        `Tablero Oficial · ${played} partido${played!==1?'s':''} jugado${played!==1?'s':''}`;
-      const now = new Date().toLocaleString('es-CO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
-      document.getElementById('last-update').textContent =
-        `Actualizado: ${now} · ${withTeams} partidos definidos`;
-
-      renderAll();
-      toast(`✅ Listo — ${played} resultado${played!==1?'s':''} cargado${played!==1?'s':''}. Tabla actualizada.`);
-
-    } catch(err){
-      toast('❌ Error al leer el Excel: ' + err.message);
-      console.error(err);
-    }
-    input.value = '';
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-// ── RENDERS ────────────────────────────────────────────────
-function renderAll(){renderStandings();renderPronos();renderPartidos();renderIniciales();renderGraficas();}
-
-function chipCls(p){
-  if(p===null||p===undefined) return 'chip-nd';
-  if(p===5) return 'chip-5'; if(p===4) return 'chip-4';
-  if(p===3) return 'chip-3'; if(p===1) return 'chip-1';
-  return 'chip-0';
-}
-
-function renderStandings(){
-  if(!ST.standings.length) return;
-  const mx = Math.max(...ST.standings.map(x=>x.pts), 1);
-  const medals=['🥇','🥈','🥉'], styles=['gold','silver','bronze'];
-  const top3 = ST.standings.slice(0,3);
-  const order = [top3[1], top3[0], top3[2]].filter(Boolean);
-  document.getElementById('podium-wrap').innerHTML = `<div class="podium">${
-    order.map(x => {
-      const i = top3.indexOf(x);
-      return `<div class="podium-card ${styles[i]}">
-        <div class="podium-medal">${medals[i]}</div>
-        <div class="podium-rank">#${x.rank}</div>
-        <div class="podium-name">${x.name}</div>
-        <div class="podium-pts">${x.pts}</div>
-        <div class="podium-pts-lbl">puntos</div>
-      </div>`;
-    }).join('')
-  }</div>`;
-
-  // Build movement map from previous standings snapshot
-  const prevMap = {};
-  ST.prevStandings.forEach(p => { prevMap[p.name] = p.rank; });
-
-  document.getElementById('standings-body').innerHTML = ST.standings.map(x => {
-    const pct = (x.pts/mx*100).toFixed(1);
-    const rc = x.rank<=3 ? `rank-${x.rank}` : '';
-    // Movement indicator
-    let mvEl = '';
-    if(ST.prevStandings.length && prevMap[x.name] !== undefined) {
-      const diff = prevMap[x.name] - x.rank; // positive = moved up
-      if(diff > 0) mvEl = `<span style="color:#5bc85b;font-size:.7rem;margin-left:4px">▲${diff}</span>`;
-      else if(diff < 0) mvEl = `<span style="color:#e05555;font-size:.7rem;margin-left:4px">▼${Math.abs(diff)}</span>`;
-      else mvEl = `<span style="color:var(--muted);font-size:.65rem;margin-left:4px">—</span>`;
-    }
-    return `<tr>
-      <td class="rank-num ${rc}">${x.rank}</td>
-      <td>${x.name}${mvEl}</td>
-      <td><div class="pts-row-wrap">
-        <div class="pts-bar" style="width:${Math.max(+pct,1)}px;max-width:80px"></div>
-        <span class="pts-badge">${x.pts}</span>
-      </div></td>
-    </tr>`;
-  }).join('');
-}
-
-function renderPronos(){
-  if(!ST.loaded) return;
-  document.getElementById('part-grid').innerHTML = ST.standings.map(s => {
-    const myP = ST.pronos[s.name] || [];
-    const init = IP[s.name] || {};
-    const pH = myP.filter(p => p.pl !== null).map(p =>
-      `<div class="match-row">
-        <span class="match-team">${p.tl}</span>
-        <span class="match-score">${p.pl}–${p.pv}</span>
-        <span class="match-team right">${p.tv}</span>
-        <span class="pts-chip ${chipCls(p.pts)}">${p.pts!==null?p.pts+'pt':'–'}</span>
-      </div>`
-    ).join('');
-    const iH = [
-      ['🏆 Campeón',init.campeon],['⚽ Goleador',init.goleador],
-      ['⭐ MVP',init.mvp],['🎯 Asistente',init.asistente],
-      ['🥇 Gol. Grupos',init.gol_grupos],['🛡️ Mejor Equipo',init.mejor_equipo]
-    ].map(([k,v]) => `<div class="init-item"><div class="init-key">${k}</div><div class="init-val">${v||'—'}</div></div>`).join('');
-    return `<div class="part-card" onclick="this.classList.toggle('expanded')">
-      <div class="part-header">
-        <div class="part-rank">${s.rank}</div>
-        <div class="part-info">
-          <div class="part-name">${s.name}</div>
-          <div class="part-pts-row"><span class="part-pts-num">${s.pts}</span><span class="part-pts-label">pts</span></div>
-        </div>
-        <div class="part-chevron">▼</div>
-      </div>
-      <div class="part-detail">
-        <div class="detail-section">
-          <div class="detail-title">Pronósticos por partido</div>
-          <div class="match-list">${pH||'<span style="color:var(--muted);font-size:.78rem">Sin pronósticos registrados aún</span>'}</div>
-        </div>
-        <div class="detail-section">
-          <div class="detail-title">Predicciones iniciales</div>
-          <div class="init-grid">${iH}</div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filterCards(q){
-  document.querySelectorAll('.part-card').forEach(c => {
-    c.style.display = c.querySelector('.part-name').textContent.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
-  });
-}
-
-function renderPartidos(){
-  if(!ST.loaded || !ST.partidos.length) return;
-  const allNames = Object.keys(ST.pronos);
-  document.getElementById('partidos-list').innerHTML = ST.partidos.map(p => {
-    const res = p.rl !== null
-      ? `<div class="partido-result">${p.rl} — ${p.rv}</div>`
-      : `<div class="partido-result pending">Por jugarse</div>`;
-    const exactos=[], corrects=[];
-    allNames.forEach(n => {
-      const pr = (ST.pronos[n]||[]).find(x => x.pid===p.id);
-      if(!pr || pr.pts===null) return;
-      if(pr.pts===5) exactos.push(n.split(' ')[0]);
-      else if(pr.pts>=3) corrects.push(n.split(' ')[0]);
-    });
-    const win = p.rl!==null ? (p.rl>p.rv?p.tl:p.rl<p.rv?p.tv:'Empate') : '';
-    return `<div class="partido-card">
-      <div class="partido-num">Partido ${p.id}</div>
-      <div class="partido-teams">
-        <div class="partido-team-name">${p.tl}</div>${res}
-        <div class="partido-team-name right">${p.tv}</div>
-      </div>
-      ${win?`<div style="font-size:.7rem;color:var(--muted);margin-bottom:5px">✅ ${win}</div>`:''}
-      ${exactos.length?`<div style="margin-bottom:4px"><span style="font-size:.62rem;color:var(--oro-c);text-transform:uppercase;letter-spacing:1px">Exacto (5pts): </span><div class="prono-summary">${exactos.map(n=>`<span class="prono-pill exact">${n}</span>`).join('')}</div></div>`:''}
-      ${corrects.length?`<div><span style="font-size:.62rem;color:var(--verde-c);text-transform:uppercase;letter-spacing:1px">Ganador (3-4pts): </span><div class="prono-summary">${corrects.map(n=>`<span class="prono-pill correct">${n}</span>`).join('')}</div></div>`:''}</div>`;
-  }).join('');
-}
-
-function renderIniciales(){
-  const names = ST.loaded ? ST.standings.map(s=>s.name) : Object.keys(IP);
-  document.getElementById('init-tbody').innerHTML = names.map(n => {
-    const i = IP[n]||{};
-    return `<tr><td style="font-weight:600">${n}</td><td>${i.campeon||'—'}</td><td>${i.goleador||'—'}</td><td>${i.mvp||'—'}</td><td>${i.asistente||'—'}</td><td>${i.gol_grupos||'—'}</td><td>${i.mejor_equipo||'—'}</td></tr>`;
-  }).join('');
-}
-
-function renderGraficas(){
-  // ── 1. Barra de puntos acumulados
-  const data = ST.loaded ? ST.standings : Object.keys(IP).map(n=>({name:n,pts:0}));
-  const mx = Math.max(...data.map(x=>x.pts), 1);
-  document.getElementById('bar-chart').innerHTML = data.map(x => {
-    const parts = x.name.split(' ');
-    const sh = `${parts[0]} ${parts[parts.length-1]}`;
-    return `<div class="bar-row">
-      <div class="bar-label">${sh}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${(x.pts/mx*100).toFixed(1)}%"></div></div>
-      <div class="bar-val">${x.pts}</div>
-    </div>`;
-  }).join('');
-
-  // ── 2. Gráfica de evolución por jornada (líneas)
-  const hist = ST.history || [];
-  const evolEmpty = document.getElementById('evol-empty');
-  const evolCanvas = document.getElementById('evol-chart');
-  if(hist.length >= 2) {
-    evolEmpty.style.display = 'none';
-    evolCanvas.style.display = 'block';
-    drawEvolChart(evolCanvas, hist, data.map(d=>d.name));
-  } else if(hist.length === 1) {
-    evolEmpty.style.display = 'block';
-    evolEmpty.textContent = 'Sube el Excel después de la próxima jornada para ver la evolución';
-    evolCanvas.style.display = 'none';
-  } else {
-    evolEmpty.style.display = 'block';
-    evolEmpty.textContent = 'Carga el Excel para ver la evolución jornada a jornada';
-    evolCanvas.style.display = 'none';
-  }
-
-  // ── 3. Gráficas de pronósticos iniciales (6 categorías)
-  const counts = {campeon:{}, goleador:{}, mvp:{}, asistente:{}, gol_grupos:{}, mejor_equipo:{}};
-  Object.values(IP).forEach(p => {
-    Object.keys(counts).forEach(k => {
-      const v = p[k]; if(v) counts[k][v] = (counts[k][v]||0)+1;
-    });
-  });
-  drawBC('campeon-chart',   Object.entries(counts.campeon).sort((a,b)=>b[1]-a[1]));
-  drawBC('goleador-chart',  Object.entries(counts.goleador).sort((a,b)=>b[1]-a[1]));
-  drawBC('mvp-chart',       Object.entries(counts.mvp).sort((a,b)=>b[1]-a[1]));
-  drawBC('asist-chart',     Object.entries(counts.asistente).sort((a,b)=>b[1]-a[1]));
-  drawBC('golgrup-chart',   Object.entries(counts.gol_grupos).sort((a,b)=>b[1]-a[1]));
-  drawBC('equipo-chart',    Object.entries(counts.mejor_equipo).sort((a,b)=>b[1]-a[1]));
-}
-
-// Horizontal bar chart — labels on left, auto-sized label column
-function drawBC(id, data){
-  if(!data || !data.length) return;
-  const canvas = document.getElementById(id);
-  if(!canvas) return;
-  const dpr = window.devicePixelRatio||1;
-  const W = canvas.parentElement.clientWidth - 20;
-  const rh = 30;
-  // Measure longest label to set label column width
-  const tmpCtx = document.createElement('canvas').getContext('2d');
-  tmpCtx.font = '500 12px Inter,sans-serif';
-  const lw = Math.min(Math.max(...data.map(([lb])=>tmpCtx.measureText(lb).width)) + 14, W * 0.42);
-  const bw = W - lw - 40;
-  const H = data.length * rh + 16;
-  canvas.width = W*dpr; canvas.height = H*dpr;
-  canvas.style.width = W+'px'; canvas.style.height = H+'px';
-  const ctx = canvas.getContext('2d'); ctx.scale(dpr,dpr);
-  const mv = data[0][1];
-  data.forEach(([lb,v],i) => {
-    const y = i*rh + 8;
-    // label
-    ctx.fillStyle='#e8f0e8'; ctx.font='500 12px Inter,sans-serif'; ctx.textAlign='right';
-    ctx.fillText(lb, lw-6, y+16);
-    // bar
-    const barLen = Math.max(v/mv*bw, 2);
-    const g = ctx.createLinearGradient(lw,0,lw+barLen,0);
-    g.addColorStop(0,'#006233'); g.addColorStop(1,'#009f4d');
-    ctx.fillStyle=g; ctx.beginPath();
-    if(ctx.roundRect) ctx.roundRect(lw, y+4, barLen, 18, 3);
-    else ctx.rect(lw, y+4, barLen, 18);
-    ctx.fill();
-    // value
-    ctx.fillStyle='#f0c040'; ctx.font='bold 11px Inter'; ctx.textAlign='left';
-    ctx.fillText(v, lw+barLen+5, y+16);
-  });
-}
-
-// Line chart for evolution across jornadas
-function drawEvolChart(canvas, hist, names){
-  const dpr = window.devicePixelRatio||1;
-  const W = canvas.parentElement.clientWidth - 20;
-  // Color palette for lines
-  const COLORS=['#f0c040','#5bc85b','#4a9ae0','#e05555','#b06ae0','#e0906a',
-                '#5be0d4','#e0c45b','#a8e063','#e063a8','#63a8e0','#e09063',
-                '#c0c0c0','#9f4d4d','#4d9f9f','#9f9f4d','#7a4de0','#4de07a',
-                '#e04d9f','#9fe04d','#4d9fe0','#e07a4d','#4de0c4','#c44de0',
-                '#e0c44d','#4de058','#e04d4d','#4d58e0','#e0a84d','#a84de0',
-                '#4de0a8','#58e04d'];
-  const labels = hist.map(h=>h.label);
-  const nJ = labels.length;
-  const allPts = names.flatMap(n => hist.map(h => h.pts[n]||0));
-  const maxPts = Math.max(...allPts, 1);
-  const PAD = {top:20, right:10, bottom:30, left:36};
-  const H = 260;
-  canvas.width = W*dpr; canvas.height = H*dpr;
-  canvas.style.width = W+'px'; canvas.style.height = H+'px';
-  const ctx = canvas.getContext('2d'); ctx.scale(dpr,dpr);
-  const plotW = W - PAD.left - PAD.right;
-  const plotH = H - PAD.top - PAD.bottom;
-
-  // Grid lines
-  const gridN = 5;
-  for(let g=0; g<=gridN; g++){
-    const y = PAD.top + plotH - (g/gridN)*plotH;
-    ctx.strokeStyle='rgba(31,46,31,0.8)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+plotW,y); ctx.stroke();
-    ctx.fillStyle='#7a9a7a'; ctx.font='10px Inter'; ctx.textAlign='right';
-    ctx.fillText(Math.round(g/gridN*maxPts), PAD.left-4, y+4);
-  }
-
-  // X axis labels
-  labels.forEach((lb,i) => {
-    const x = PAD.left + (nJ===1 ? plotW/2 : i/(nJ-1)*plotW);
-    ctx.fillStyle='#7a9a7a'; ctx.font='10px Inter'; ctx.textAlign='center';
-    ctx.fillText(lb, x, H-PAD.bottom+14);
-  });
-
-  // Lines per participant (top 10 by last jornada pts to keep readable)
-  const lastPts = n => hist[hist.length-1].pts[n]||0;
-  const topNames = [...names].sort((a,b)=>lastPts(b)-lastPts(a)).slice(0,10);
-
-  topNames.forEach((name,ci) => {
-    const pts = hist.map(h => h.pts[name]||0);
-    ctx.strokeStyle = COLORS[ci % COLORS.length];
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    pts.forEach((p,i) => {
-      const x = PAD.left + (nJ===1 ? plotW/2 : i/(nJ-1)*plotW);
-      const y = PAD.top + plotH - (p/maxPts)*plotH;
-      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-    });
-    ctx.stroke();
-    // Dot at last point
-    const lx = PAD.left + plotW;
-    const ly = PAD.top + plotH - (pts[pts.length-1]/maxPts)*plotH;
-    ctx.fillStyle = COLORS[ci % COLORS.length];
-    ctx.beginPath(); ctx.arc(lx, ly, 3, 0, Math.PI*2); ctx.fill();
-    // Name label at end
-    const parts = name.split(' ');
-    const short = `${parts[0]} ${parts[parts.length-1]}`;
-    ctx.fillStyle = COLORS[ci % COLORS.length];
-    ctx.font = '10px Inter'; ctx.textAlign = 'left';
-    // stagger labels to avoid overlap
-    ctx.fillText(short, lx+5, ly+(ci%2===0?-4:10));
-  });
-}
-
-function showTab(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-}
-
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
-}
-
-// ── ADMIN PANEL ────────────────────────────────────────────
-// Contraseña: cambia "mundialMichael2026" por la que quieras
+// ── ADMIN ──────────────────────────────────────────────────
 const ADMIN_PASS = 'mundialMichael2026';
 let adminClicks = 0, adminTimer = null;
-
 function adminClick(){
   adminClicks++;
   clearTimeout(adminTimer);
@@ -1996,10 +252,8 @@ function adminClick(){
       setTimeout(()=>document.getElementById('admin-pass').focus(), 80);
   }
 }
-
 function checkPass(){
-  const val = document.getElementById('admin-pass').value;
-  if(val === ADMIN_PASS){
+  if(document.getElementById('admin-pass').value === ADMIN_PASS){
     document.getElementById('admin-auth').style.display = 'none';
     document.getElementById('admin-controls').style.display = 'flex';
     document.getElementById('admin-err').style.display = 'none';
@@ -2009,16 +263,194 @@ function checkPass(){
     document.getElementById('admin-pass').focus();
   }
 }
-
 function closeAdmin(){
   document.getElementById('admin-panel').style.display = 'none';
   document.getElementById('admin-controls').style.display = 'none';
   document.getElementById('admin-auth').style.display = 'flex';
 }
 
-// Render predicciones iniciales al cargar (siempre disponibles)
-renderIniciales();
+// ── SCORING ────────────────────────────────────────────────
+function scorePts(pl,pv,rl,rv){
+  if(pl==null||pv==null||rl==null||rv==null) return null;
+  pl=+pl; pv=+pv; rl=+rl; rv=+rv;
+  if(isNaN(pl+pv+rl+rv)) return null;
+  if(pl===rl&&pv===rv) return 5;
+  const sp=Math.sign(pl-pv), sr=Math.sign(rl-rv);
+  if(sp===sr) return(pl===rl||pv===rv)?4:3;
+  return(pl===rl||pv===rv)?1:0;
+}
+
+// ── EXCEL LOADER (para actualizaciones en vivo vía admin) ──
+function cv(ws,row,col){const a=XLSX.utils.encode_cell({r:row-1,c:col-1});const cell=ws[a];return cell?(cell.v??null):null;}
+function cvNum(ws,row,col){const v=cv(ws,row,col);if(v===null||v==='')return null;const n=+v;return isNaN(n)?null:n;}
+function cvStr(ws,row,col){const v=cv(ws,row,col);return(v!==null&&v!==undefined&&v!=='')? String(v).trim():null;}
+
+function loadExcel(input){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array',cellFormula:false});
+      const wsR=wb.Sheets['RESULTADOS'];
+      if(!wsR) throw new Error('No encontré la hoja RESULTADOS');
+      const enriched=PM.map(p=>{
+        let tl=cvStr(wsR,3,p.plc)||p.tl;
+        let tv=cvStr(wsR,3,p.pvc)||p.tv;
+        if(tl==='Puntos') tl=p.tl; if(tv==='Puntos') tv=p.tv;
+        const rl=cvNum(wsR,2,p.rlc), rv=cvNum(wsR,2,p.rvc);
+        return{...p,tl,tv,rl,rv};
+      });
+      const partRows=[];
+      for(let r=4;r<=35;r++){const n=cvStr(wsR,r,1);if(n)partRows.push({name:n,row:r});}
+      const pronos={},totalPts={};
+      partRows.forEach(({name,row})=>{
+        pronos[name]=[]; totalPts[name]=0;
+        enriched.forEach(p=>{
+          if(!p.tl) return;
+          const pl=cvNum(wsR,row,p.plc), pv=cvNum(wsR,row,p.pvc);
+          const sc=scorePts(pl,pv,p.rl,p.rv);
+          pronos[name].push({pid:p.id,tl:p.tl,tv:p.tv,pl,pv,rl:p.rl,rv:p.rv,pts:sc});
+          if(sc!==null) totalPts[name]+=sc;
+        });
+      });
+      const standings=partRows.map(({name})=>({name,pts:totalPts[name]||0}))
+        .sort((a,b)=>b.pts-a.pts).map((s,i)=>({...s,rank:i+1}));
+      const played=enriched.filter(p=>p.tl&&p.rl!==null).length;
+      const prevStandings=ST.standings.length?ST.standings:[];
+      const newHistory=[...ST.history,{label:`J${ST.history.length+1}`,pts:Object.fromEntries(partRows.map(({name})=>[name,totalPts[name]||0]))}];
+      ST={standings,pronos,partidos:enriched.filter(p=>p.tl),history:newHistory,prevStandings,loaded:true};
+      document.getElementById('stat-played').textContent=played;
+      document.getElementById('stat-pending').textContent=104-played;
+      document.getElementById('header-sub').textContent=`Tablero Oficial · ${played} partido${played!==1?'s':''} jugado${played!==1?'s':''}`;
+      const now=new Date().toLocaleString('es-CO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+      document.getElementById('last-update').textContent=`Actualizado en vivo: ${now}`;
+      renderAll();
+      toast(`✅ Listo — ${played} resultado${played!==1?'s':''} cargado${played!==1?'s':''}`);
+    }catch(err){toast('❌ Error: '+err.message); console.error(err);}
+    input.value='';
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ── RENDERS ────────────────────────────────────────────────
+function renderAll(){renderStandings();renderPronos();renderPartidos();renderIniciales();renderGraficas();}
+function chipCls(p){if(p===null||p===undefined)return'chip-nd';if(p===5)return'chip-5';if(p===4)return'chip-4';if(p===3)return'chip-3';if(p===1)return'chip-1';return'chip-0';}
+
+function renderStandings(){
+  if(!ST.standings.length) return;
+  const mx=Math.max(...ST.standings.map(x=>x.pts),1);
+  const medals=['🥇','🥈','🥉'],styles=['gold','silver','bronze'];
+  const top3=ST.standings.slice(0,3);
+  const order=[top3[1],top3[0],top3[2]].filter(Boolean);
+  document.getElementById('podium-wrap').innerHTML=`<div class="podium">${order.map(x=>{const i=top3.indexOf(x);return`<div class="podium-card ${styles[i]}"><div class="podium-medal">${medals[i]}</div><div class="podium-rank">#${x.rank}</div><div class="podium-name">${x.name}</div><div class="podium-pts">${x.pts}</div><div class="podium-pts-lbl">puntos</div></div>`;}).join('')}</div>`;
+  const prevMap={};ST.prevStandings.forEach(p=>{prevMap[p.name]=p.rank;});
+  document.getElementById('standings-body').innerHTML=ST.standings.map(x=>{
+    const pct=(x.pts/mx*100).toFixed(1),rc=x.rank<=3?`rank-${x.rank}`:'';
+    let mv='';
+    if(ST.prevStandings.length&&prevMap[x.name]!==undefined){
+      const d=prevMap[x.name]-x.rank;
+      mv=d>0?`<span style="color:#5bc85b;font-size:.7rem;margin-left:4px">▲${d}</span>`:d<0?`<span style="color:#e05555;font-size:.7rem;margin-left:4px">▼${Math.abs(d)}</span>`:`<span style="color:var(--muted);font-size:.65rem;margin-left:4px">—</span>`;
+    }
+    return`<tr><td class="rank-num ${rc}">${x.rank}</td><td>${x.name}${mv}</td><td><div class="pts-row-wrap"><div class="pts-bar" style="width:${Math.max(+pct,1)}px;max-width:80px"></div><span class="pts-badge">${x.pts}</span></div></td></tr>`;
+  }).join('');
+}
+
+function renderPronos(){
+  document.getElementById('part-grid').innerHTML=ST.standings.map(s=>{
+    const myP=ST.pronos[s.name]||[],init=IP[s.name]||{};
+    const pH=myP.filter(p=>p.pl!==null).map(p=>`<div class="match-row"><span class="match-team">${p.tl}</span><span class="match-score">${p.pl}–${p.pv}</span><span class="match-team right">${p.tv}</span><span class="pts-chip ${chipCls(p.pts)}">${p.pts!==null?p.pts+'pt':'–'}</span></div>`).join('');
+    const iH=[['🏆 Campeón',init.campeon],['⚽ Goleador',init.goleador],['⭐ MVP',init.mvp],['🎯 Asistente',init.asistente],['🥇 Gol. Grupos',init.gol_grupos],['🛡️ Mejor Equipo',init.mejor_equipo]].map(([k,v])=>`<div class="init-item"><div class="init-key">${k}</div><div class="init-val">${v||'—'}</div></div>`).join('');
+    return`<div class="part-card" onclick="this.classList.toggle('expanded')"><div class="part-header"><div class="part-rank">${s.rank}</div><div class="part-info"><div class="part-name">${s.name}</div><div class="part-pts-row"><span class="part-pts-num">${s.pts}</span><span class="part-pts-label">pts</span></div></div><div class="part-chevron">▼</div></div><div class="part-detail"><div class="detail-section"><div class="detail-title">Pronósticos</div><div class="match-list">${pH||'<span style="color:var(--muted);font-size:.78rem">Sin pronósticos aún</span>'}</div></div><div class="detail-section"><div class="detail-title">Predicciones iniciales</div><div class="init-grid">${iH}</div></div></div></div>`;
+  }).join('');
+}
+function filterCards(q){document.querySelectorAll('.part-card').forEach(c=>{c.style.display=c.querySelector('.part-name').textContent.toLowerCase().includes(q.toLowerCase())?'':'none';});}
+
+function renderPartidos(){
+  if(!ST.partidos.length){document.getElementById('partidos-list').innerHTML='<div class="empty"><div class="empty-icon">⚽</div><p>Los equipos se definirán al inicio de cada jornada</p></div>';return;}
+  const allNames=Object.keys(ST.pronos);
+  document.getElementById('partidos-list').innerHTML=ST.partidos.map(p=>{
+    const res=p.rl!==null?`<div class="partido-result">${p.rl} — ${p.rv}</div>`:`<div class="partido-result pending">Por jugarse</div>`;
+    const exactos=[],corrects=[];
+    allNames.forEach(n=>{const pr=(ST.pronos[n]||[]).find(x=>x.pid===p.id);if(!pr||pr.pts===null)return;if(pr.pts===5)exactos.push(n.split(' ')[0]);else if(pr.pts>=3)corrects.push(n.split(' ')[0]);});
+    const win=p.rl!==null?(p.rl>p.rv?p.tl:p.rl<p.rv?p.tv:'Empate'):'';
+    return`<div class="partido-card"><div class="partido-num">Partido ${p.id}</div><div class="partido-teams"><div class="partido-team-name">${p.tl}</div>${res}<div class="partido-team-name right">${p.tv}</div></div>${win?`<div style="font-size:.7rem;color:var(--muted);margin-bottom:5px">✅ ${win}</div>`:''}${exactos.length?`<div style="margin-bottom:4px"><span style="font-size:.62rem;color:var(--oro-c);text-transform:uppercase;letter-spacing:1px">Exacto (5pts): </span><div class="prono-summary">${exactos.map(n=>`<span class="prono-pill exact">${n}</span>`).join('')}</div></div>`:''}${corrects.length?`<div><span style="font-size:.62rem;color:var(--verde-c);text-transform:uppercase;letter-spacing:1px">Ganador (3-4pts): </span><div class="prono-summary">${corrects.map(n=>`<span class="prono-pill correct">${n}</span>`).join('')}</div></div>`:''}</div>`;
+  }).join('');
+}
+
+function renderIniciales(){
+  const names=ST.standings.length?ST.standings.map(s=>s.name):Object.keys(IP);
+  document.getElementById('init-tbody').innerHTML=names.map(n=>{const i=IP[n]||{};return`<tr><td style="font-weight:600">${n}</td><td>${i.campeon||'—'}</td><td>${i.goleador||'—'}</td><td>${i.mvp||'—'}</td><td>${i.asistente||'—'}</td><td>${i.gol_grupos||'—'}</td><td>${i.mejor_equipo||'—'}</td></tr>`;}).join('');
+}
+
+function renderGraficas(){
+  const data=ST.standings;
+  const mx=Math.max(...data.map(x=>x.pts),1);
+  document.getElementById('bar-chart').innerHTML=data.map(x=>{const parts=x.name.split(' ');const sh=`${parts[0]} ${parts[parts.length-1]}`;return`<div class="bar-row"><div class="bar-label">${sh}</div><div class="bar-track"><div class="bar-fill" style="width:${(x.pts/mx*100).toFixed(1)}%"></div></div><div class="bar-val">${x.pts}</div></div>`;}).join('');
+  const hist=ST.history||[];
+  const evolEmpty=document.getElementById('evol-empty'),evolCanvas=document.getElementById('evol-chart');
+  if(hist.length>=2){evolEmpty.style.display='none';evolCanvas.style.display='block';drawEvolChart(evolCanvas,hist,data.map(d=>d.name));}
+  else{evolEmpty.style.display='block';evolCanvas.style.display='none';}
+  const counts={campeon:{},goleador:{},mvp:{},asistente:{},gol_grupos:{},mejor_equipo:{}};
+  Object.values(IP).forEach(p=>{Object.keys(counts).forEach(k=>{const v=p[k];if(v)counts[k][v]=(counts[k][v]||0)+1;});});
+  drawBC('campeon-chart',Object.entries(counts.campeon).sort((a,b)=>b[1]-a[1]));
+  drawBC('goleador-chart',Object.entries(counts.goleador).sort((a,b)=>b[1]-a[1]));
+  drawBC('mvp-chart',Object.entries(counts.mvp).sort((a,b)=>b[1]-a[1]));
+  drawBC('asist-chart',Object.entries(counts.asistente).sort((a,b)=>b[1]-a[1]));
+  drawBC('golgrup-chart',Object.entries(counts.gol_grupos).sort((a,b)=>b[1]-a[1]));
+  drawBC('equipo-chart',Object.entries(counts.mejor_equipo).sort((a,b)=>b[1]-a[1]));
+}
+
+function drawBC(id,data){
+  if(!data||!data.length)return;
+  const canvas=document.getElementById(id);if(!canvas)return;
+  const dpr=window.devicePixelRatio||1,W=canvas.parentElement.clientWidth-20;
+  const tmpCtx=document.createElement('canvas').getContext('2d');
+  tmpCtx.font='500 12px Inter,sans-serif';
+  const lw=Math.min(Math.max(...data.map(([lb])=>tmpCtx.measureText(lb).width))+14,W*.42);
+  const bw=W-lw-40,rh=30,H=data.length*rh+16;
+  canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const mv=data[0][1];
+  data.forEach(([lb,v],i)=>{
+    const y=i*rh+8;
+    ctx.fillStyle='#e8f0e8';ctx.font='500 12px Inter,sans-serif';ctx.textAlign='right';ctx.fillText(lb,lw-6,y+16);
+    const barLen=Math.max(v/mv*bw,2),g=ctx.createLinearGradient(lw,0,lw+barLen,0);
+    g.addColorStop(0,'#006233');g.addColorStop(1,'#009f4d');ctx.fillStyle=g;ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(lw,y+4,barLen,18,3);else ctx.rect(lw,y+4,barLen,18);ctx.fill();
+    ctx.fillStyle='#f0c040';ctx.font='bold 11px Inter';ctx.textAlign='left';ctx.fillText(v,lw+barLen+5,y+16);
+  });
+}
+
+function drawEvolChart(canvas,hist,names){
+  const COLORS=['#f0c040','#5bc85b','#4a9ae0','#e05555','#b06ae0','#e0906a','#5be0d4','#e0c45b','#a8e063','#e063a8'];
+  const dpr=window.devicePixelRatio||1,W=canvas.parentElement.clientWidth-20;
+  const labels=hist.map(h=>h.label),nJ=labels.length;
+  const allPts=names.flatMap(n=>hist.map(h=>h.pts[n]||0));
+  const maxPts=Math.max(...allPts,1);
+  const PAD={top:20,right:10,bottom:30,left:36},H=260;
+  canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+  const plotW=W-PAD.left-PAD.right,plotH=H-PAD.top-PAD.bottom;
+  for(let g=0;g<=5;g++){const y=PAD.top+plotH-(g/5)*plotH;ctx.strokeStyle='rgba(31,46,31,0.8)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+plotW,y);ctx.stroke();ctx.fillStyle='#7a9a7a';ctx.font='10px Inter';ctx.textAlign='right';ctx.fillText(Math.round(g/5*maxPts),PAD.left-4,y+4);}
+  labels.forEach((lb,i)=>{const x=PAD.left+(nJ===1?plotW/2:i/(nJ-1)*plotW);ctx.fillStyle='#7a9a7a';ctx.font='10px Inter';ctx.textAlign='center';ctx.fillText(lb,x,H-PAD.bottom+14);});
+  const lastPts=n=>hist[hist.length-1].pts[n]||0;
+  const topNames=[...names].sort((a,b)=>lastPts(b)-lastPts(a)).slice(0,10);
+  topNames.forEach((name,ci)=>{
+    const pts=hist.map(h=>h.pts[name]||0);
+    ctx.strokeStyle=COLORS[ci%COLORS.length];ctx.lineWidth=2;ctx.beginPath();
+    pts.forEach((p,i)=>{const x=PAD.left+(nJ===1?plotW/2:i/(nJ-1)*plotW),y=PAD.top+plotH-(p/maxPts)*plotH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();
+    const lx=PAD.left+plotW,ly=PAD.top+plotH-(pts[pts.length-1]/maxPts)*plotH;
+    ctx.fillStyle=COLORS[ci%COLORS.length];ctx.beginPath();ctx.arc(lx,ly,3,0,Math.PI*2);ctx.fill();
+    const parts=name.split(' ');const sh=`${parts[0]} ${parts[parts.length-1]}`;
+    ctx.font='10px Inter';ctx.textAlign='left';ctx.fillText(sh,lx+5,ly+(ci%2===0?-4:10));
+  });
+}
+
+function showTab(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+
+// ── INICIALIZAR ─────────────────────────────────────────────
+document.getElementById('header-sub').textContent = `Tablero Oficial · ${PLAYED} partido${PLAYED!==1?'s':''} jugado${PLAYED!==1?'s':''}`;
+renderAll();
 </script>
-
-
-</body></html>
+</body>
+</html>
