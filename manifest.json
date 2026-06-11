@@ -1,0 +1,20 @@
+{
+  "name": "Polla Mundial 2026",
+  "short_name": "Polla 2026",
+  "description": "Tablero oficial de la Polla Mundial 2026",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0e0a",
+  "theme_color": "#006233",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iYmciIGN4PSI0MCUiIGN5PSIzNSUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDA2MjMzIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMmExNCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNTIiIGZpbGw9InVybCgjYmcpIi8+CiAgPGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNDQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q0QTAxNyIgc3Ryb2tlLXdpZHRoPSIxNiIvPgogIDxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjI4IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGMwNDAiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iMC40Ii8+CiAgPCEtLSDimr0gZW1vamkgcmVuZGVyZWQgYXMgdGV4dCAtLT4KICA8dGV4dCB4PSIyNTYiIHk9IjMwMCIgZm9udC1zaXplPSIyMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPuKavTwvdGV4dD4KICA8IS0tIEdvbGQgc2hpbW1lciBhcmMgLS0+CiAgPHBhdGggZD0iTSAxMzAgMTMwIFEgMjU2IDgwIDM4MiAxMzAiIHN0cm9rZT0iI2YwYzA0MCIgc3Ryb2tlLXdpZHRoPSI2IiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4=",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
