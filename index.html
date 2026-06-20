@@ -149,6 +149,25 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 .fb-btn{background:var(--verde);color:#fff;border:none;border-radius:6px;padding:5px 10px;font-family:"Inter",sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .fb-btn:hover{background:var(--verde-c)}
 .fb-live{display:inline-block;background:rgba(91,200,91,.15);border:1px solid #5bc85b;color:#5bc85b;border-radius:20px;padding:1px 7px;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;margin-left:6px;vertical-align:middle}
+
+/* ── SANCIONES ── */
+.san-card{background:var(--card);border:1px solid var(--border);border-left:3px solid #e05555;border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.san-name{font-weight:600;font-size:.88rem}
+.san-jornada{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#e05555;background:rgba(224,85,85,.12);border:1px solid #e05555;border-radius:20px;padding:2px 12px;white-space:nowrap}
+.san-empty{text-align:center;padding:40px 20px;color:var(--muted)}
+
+/* ── DATOS CURIOSOS ── */
+.curioso-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;display:flex;align-items:flex-start;gap:12px}
+.curioso-icon{font-size:1.8rem;flex-shrink:0;line-height:1}
+.curioso-title{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.curioso-text{font-size:.92rem;line-height:1.5;color:var(--text)}
+.curioso-text b{color:var(--oro-c)}
+.curioso-sub{font-size:.72rem;color:var(--muted);margin-top:4px}
+.compare-hint{font-size:.68rem;color:var(--muted);margin-top:8px;font-style:italic}
+.compare-chip{display:inline-flex;align-items:center;gap:5px;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:.74rem;cursor:pointer;transition:all .15s;margin:3px}
+.compare-chip:hover{border-color:var(--verde-c)}
+.compare-chip.selected{border-color:var(--oro);background:rgba(212,160,23,.15);color:var(--oro-c)}
+.compare-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
 </style>
 </head>
 <body>
@@ -168,7 +187,7 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
 <div class="update-bar">
   <div>
     <div class="update-label">⚽ Polla Mundial 2026 · Tablero en vivo</div>
-    <div class="update-info" id="last-update">Actualizado: 20 Jun 2026, 11:04</div>
+    <div class="update-info" id="last-update">Actualizado: 20 Jun 2026, 11:44</div>
   </div>
   <div id="secret-trigger" onclick="adminClick()" title=""
     style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.18;font-size:1.1rem;user-select:none">⚙</div>
@@ -211,6 +230,8 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
   <button class="nav-btn" onclick="showTab('partidos',this)">⚽ Partidos</button>
   <button class="nav-btn" onclick="showTab('iniciales',this)">🌟 Predicciones</button>
   <button class="nav-btn" onclick="showTab('graficas',this)">📊 Gráficas</button>
+  <button class="nav-btn" onclick="showTab('sanciones',this)">⛔ Sanciones</button>
+  <button class="nav-btn" onclick="showTab('curiosos',this)">🔮 Datos Curiosos</button>
 </nav>
 
 <div id="tabla" class="section active">
@@ -247,12 +268,22 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min
   <div class="chart-wrap"><div class="chart-title">🥇 Goleador fase de grupos</div><canvas id="golgrup-chart"></canvas></div>
   <div class="chart-wrap"><div class="chart-title">🛡️ Mejor equipo fase de grupos</div><canvas id="equipo-chart"></canvas></div>
 </div>
+
+<div id="sanciones" class="section">
+  <input class="search-bar" type="text" placeholder="Buscar por participante o jornada (ej: J5)..." oninput="filterSanciones(this.value)" id="sanciones-search">
+  <div id="sanciones-list"></div>
+</div>
+
+<div id="curiosos" class="section">
+  <div id="curiosos-list"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 // ── DATOS INYECTADOS POR generar_pagina.py ─────────────────
 // ── DATOS PRECOMPUTADOS (generados por generar_pagina.py) ──
-const LAST_UPDATE = "20 Jun 2026, 11:04";
+const LAST_UPDATE = "20 Jun 2026, 11:44";
 const PLAYED      = 32;
 const PENDING     = 72;
 const PM          = [{"id": 1, "tl": "Mexico", "tv": "Sudafrica", "plc": 2, "pvc": 3, "rlc": 4, "rvc": 5, "rl": 2, "rv": 0}, {"id": 2, "tl": "Corea", "tv": "R. Checa", "plc": 6, "pvc": 7, "rlc": 8, "rvc": 9, "rl": 2, "rv": 1}, {"id": 3, "tl": "Canada", "tv": "Boznia", "plc": 11, "pvc": 12, "rlc": 13, "rvc": 14, "rl": 1, "rv": 1}, {"id": 4, "tl": "EEUU", "tv": "Paraguay", "plc": 15, "pvc": 16, "rlc": 17, "rvc": 18, "rl": 4, "rv": 1}, {"id": 5, "tl": "Catar", "tv": "Suiza", "plc": 20, "pvc": 21, "rlc": 22, "rvc": 23, "rl": 1, "rv": 1}, {"id": 6, "tl": "Brasil", "tv": "Marruecos", "plc": 24, "pvc": 25, "rlc": 26, "rvc": 27, "rl": 1, "rv": 1}, {"id": 7, "tl": "Haiti", "tv": "Escocia", "plc": 28, "pvc": 29, "rlc": 30, "rvc": 31, "rl": 0, "rv": 1}, {"id": 8, "tl": "Australia", "tv": "Turquía", "plc": 32, "pvc": 33, "rlc": 34, "rvc": 35, "rl": 2, "rv": 0}, {"id": 9, "tl": "Alemania", "tv": "Curazao", "plc": 37, "pvc": 38, "rlc": 39, "rvc": 40, "rl": 7, "rv": 1}, {"id": 10, "tl": "Países bajos", "tv": "Japon", "plc": 41, "pvc": 42, "rlc": 43, "rvc": 44, "rl": 2, "rv": 2}, {"id": 11, "tl": "Costa de marfil", "tv": "Ecuador", "plc": 45, "pvc": 46, "rlc": 47, "rvc": 48, "rl": 1, "rv": 0}, {"id": 12, "tl": "Suecia", "tv": "Túnez", "plc": 49, "pvc": 50, "rlc": 51, "rvc": 52, "rl": 5, "rv": 1}, {"id": 13, "tl": "España", "tv": "Cabo Verde", "plc": 54, "pvc": 55, "rlc": 56, "rvc": 57, "rl": 0, "rv": 0}, {"id": 14, "tl": "Belgica", "tv": "Egipto", "plc": 58, "pvc": 59, "rlc": 60, "rvc": 61, "rl": 1, "rv": 1}, {"id": 15, "tl": "Arabia Saudí", "tv": "Uruguay", "plc": 62, "pvc": 63, "rlc": 64, "rvc": 65, "rl": 1, "rv": 1}, {"id": 16, "tl": "Iran", "tv": "Nueva Zelanda", "plc": 66, "pvc": 67, "rlc": 68, "rvc": 69, "rl": 2, "rv": 2}, {"id": 17, "tl": "Francia", "tv": "Senegal", "plc": 71, "pvc": 72, "rlc": 73, "rvc": 74, "rl": 3, "rv": 1}, {"id": 18, "tl": "Iraq", "tv": "Noruega", "plc": 75, "pvc": 76, "rlc": 77, "rvc": 78, "rl": 1, "rv": 4}, {"id": 19, "tl": "Argentina", "tv": "Argelia", "plc": 79, "pvc": 80, "rlc": 81, "rvc": 82, "rl": 3, "rv": 0}, {"id": 20, "tl": "Austria", "tv": "Jordania", "plc": 83, "pvc": 84, "rlc": 85, "rvc": 86, "rl": 3, "rv": 1}, {"id": 21, "tl": "Portugal", "tv": "RD Congo", "plc": 88, "pvc": 89, "rlc": 90, "rvc": 91, "rl": 1, "rv": 1}, {"id": 22, "tl": "Inlgaterra", "tv": "Croacia", "plc": 92, "pvc": 93, "rlc": 94, "rvc": 95, "rl": 4, "rv": 2}, {"id": 23, "tl": "Ghana", "tv": "Panamá", "plc": 96, "pvc": 97, "rlc": 98, "rvc": 99, "rl": 1, "rv": 0}, {"id": 24, "tl": "Usbekistan", "tv": "Colombia", "plc": 100, "pvc": 101, "rlc": 102, "rvc": 103, "rl": 1, "rv": 3}, {"id": 25, "tl": "R. Checa", "tv": "Sudáfrica", "plc": 105, "pvc": 106, "rlc": 107, "rvc": 108, "rl": 1, "rv": 1}, {"id": 26, "tl": "Suiza", "tv": "Bosnia", "plc": 109, "pvc": 110, "rlc": 111, "rvc": 112, "rl": 4, "rv": 1}, {"id": 27, "tl": "Canadá", "tv": "Catar", "plc": 113, "pvc": 114, "rlc": 115, "rvc": 116, "rl": 6, "rv": 0}, {"id": 28, "tl": "Mexico", "tv": "Corea", "plc": 117, "pvc": 118, "rlc": 119, "rvc": 120, "rl": 1, "rv": 0}, {"id": 29, "tl": "EEUU", "tv": "Australia", "plc": 122, "pvc": 123, "rlc": 124, "rvc": 125, "rl": 2, "rv": 0}, {"id": 30, "tl": "Escocia", "tv": "Marruecos", "plc": 126, "pvc": 127, "rlc": 128, "rvc": 129, "rl": 0, "rv": 1}, {"id": 31, "tl": "Brasil", "tv": "Haiti", "plc": 130, "pvc": 131, "rlc": 132, "rvc": 133, "rl": 3, "rv": 0}, {"id": 32, "tl": "Turquia", "tv": "Paraguay", "plc": 134, "pvc": 135, "rlc": 136, "rvc": 137, "rl": 0, "rv": 1}, {"id": 33, "tl": "Países bajos", "tv": "Suecia", "plc": 139, "pvc": 140, "rlc": 141, "rvc": 142, "rl": null, "rv": null}, {"id": 34, "tl": "Alemania", "tv": "Costa de marfil", "plc": 143, "pvc": 144, "rlc": 145, "rvc": 146, "rl": null, "rv": null}, {"id": 35, "tl": "Ecuador", "tv": "Curazao", "plc": 147, "pvc": 148, "rlc": 149, "rvc": 150, "rl": null, "rv": null}, {"id": 36, "tl": "Túnez", "tv": "Japón", "plc": 151, "pvc": 152, "rlc": 153, "rvc": 154, "rl": null, "rv": null}, {"id": 37, "tl": null, "tv": null, "plc": 156, "pvc": 157, "rlc": 158, "rvc": 159, "rl": null, "rv": null}, {"id": 38, "tl": null, "tv": null, "plc": 160, "pvc": 161, "rlc": 162, "rvc": 163, "rl": null, "rv": null}, {"id": 39, "tl": null, "tv": null, "plc": 164, "pvc": 165, "rlc": 166, "rvc": 167, "rl": null, "rv": null}, {"id": 40, "tl": null, "tv": null, "plc": 168, "pvc": 169, "rlc": 170, "rvc": 171, "rl": null, "rv": null}, {"id": 41, "tl": null, "tv": null, "plc": 173, "pvc": 174, "rlc": 175, "rvc": 176, "rl": null, "rv": null}, {"id": 42, "tl": null, "tv": null, "plc": 177, "pvc": 178, "rlc": 179, "rvc": 180, "rl": null, "rv": null}, {"id": 43, "tl": null, "tv": null, "plc": 181, "pvc": 182, "rlc": 183, "rvc": 184, "rl": null, "rv": null}, {"id": 44, "tl": null, "tv": null, "plc": 185, "pvc": 186, "rlc": 187, "rvc": 188, "rl": null, "rv": null}, {"id": 45, "tl": null, "tv": null, "plc": 190, "pvc": 191, "rlc": 192, "rvc": 193, "rl": null, "rv": null}, {"id": 46, "tl": null, "tv": null, "plc": 194, "pvc": 195, "rlc": 196, "rvc": 197, "rl": null, "rv": null}, {"id": 47, "tl": null, "tv": null, "plc": 198, "pvc": 199, "rlc": 200, "rvc": 201, "rl": null, "rv": null}, {"id": 48, "tl": null, "tv": null, "plc": 202, "pvc": 203, "rlc": 204, "rvc": 205, "rl": null, "rv": null}, {"id": 49, "tl": null, "tv": null, "plc": 207, "pvc": 208, "rlc": 209, "rvc": 210, "rl": null, "rv": null}, {"id": 50, "tl": null, "tv": null, "plc": 211, "pvc": 212, "rlc": 213, "rvc": 214, "rl": null, "rv": null}, {"id": 51, "tl": null, "tv": null, "plc": 215, "pvc": 216, "rlc": 217, "rvc": 218, "rl": null, "rv": null}, {"id": 52, "tl": null, "tv": null, "plc": 219, "pvc": 220, "rlc": 221, "rvc": 222, "rl": null, "rv": null}, {"id": 53, "tl": null, "tv": null, "plc": 223, "pvc": 224, "rlc": 225, "rvc": 226, "rl": null, "rv": null}, {"id": 54, "tl": null, "tv": null, "plc": 227, "pvc": 228, "rlc": 229, "rvc": 230, "rl": null, "rv": null}, {"id": 55, "tl": null, "tv": null, "plc": 232, "pvc": 233, "rlc": 234, "rvc": 235, "rl": null, "rv": null}, {"id": 56, "tl": null, "tv": null, "plc": 236, "pvc": 237, "rlc": 238, "rvc": 239, "rl": null, "rv": null}, {"id": 57, "tl": null, "tv": null, "plc": 240, "pvc": 241, "rlc": 242, "rvc": 243, "rl": null, "rv": null}, {"id": 58, "tl": null, "tv": null, "plc": 244, "pvc": 245, "rlc": 246, "rvc": 247, "rl": null, "rv": null}, {"id": 59, "tl": null, "tv": null, "plc": 248, "pvc": 249, "rlc": 250, "rvc": 251, "rl": null, "rv": null}, {"id": 60, "tl": null, "tv": null, "plc": 252, "pvc": 253, "rlc": 254, "rvc": 255, "rl": null, "rv": null}, {"id": 61, "tl": null, "tv": null, "plc": 257, "pvc": 258, "rlc": 259, "rvc": 260, "rl": null, "rv": null}, {"id": 62, "tl": null, "tv": null, "plc": 261, "pvc": 262, "rlc": 263, "rvc": 264, "rl": null, "rv": null}, {"id": 63, "tl": null, "tv": null, "plc": 265, "pvc": 266, "rlc": 267, "rvc": 268, "rl": null, "rv": null}, {"id": 64, "tl": null, "tv": null, "plc": 269, "pvc": 270, "rlc": 271, "rvc": 272, "rl": null, "rv": null}, {"id": 65, "tl": null, "tv": null, "plc": 273, "pvc": 274, "rlc": 275, "rvc": 276, "rl": null, "rv": null}, {"id": 66, "tl": null, "tv": null, "plc": 277, "pvc": 278, "rlc": 279, "rvc": 280, "rl": null, "rv": null}, {"id": 67, "tl": null, "tv": null, "plc": 282, "pvc": 283, "rlc": 284, "rvc": 285, "rl": null, "rv": null}, {"id": 68, "tl": null, "tv": null, "plc": 286, "pvc": 287, "rlc": 288, "rvc": 289, "rl": null, "rv": null}, {"id": 69, "tl": null, "tv": null, "plc": 290, "pvc": 291, "rlc": 292, "rvc": 293, "rl": null, "rv": null}, {"id": 70, "tl": null, "tv": null, "plc": 294, "pvc": 295, "rlc": 296, "rvc": 297, "rl": null, "rv": null}, {"id": 71, "tl": null, "tv": null, "plc": 298, "pvc": 299, "rlc": 300, "rvc": 301, "rl": null, "rv": null}, {"id": 72, "tl": null, "tv": null, "plc": 302, "pvc": 303, "rlc": 304, "rvc": 305, "rl": null, "rv": null}, {"id": 73, "tl": null, "tv": null, "plc": 307, "pvc": 308, "rlc": 309, "rvc": 310, "rl": null, "rv": null}, {"id": 74, "tl": null, "tv": null, "plc": 312, "pvc": 313, "rlc": 314, "rvc": 315, "rl": null, "rv": null}, {"id": 75, "tl": null, "tv": null, "plc": 316, "pvc": 317, "rlc": 318, "rvc": 319, "rl": null, "rv": null}, {"id": 76, "tl": null, "tv": null, "plc": 320, "pvc": 321, "rlc": 322, "rvc": 323, "rl": null, "rv": null}, {"id": 77, "tl": null, "tv": null, "plc": 325, "pvc": 326, "rlc": 327, "rvc": 328, "rl": null, "rv": null}, {"id": 78, "tl": null, "tv": null, "plc": 329, "pvc": 330, "rlc": 331, "rvc": 332, "rl": null, "rv": null}, {"id": 79, "tl": null, "tv": null, "plc": 333, "pvc": 334, "rlc": 335, "rvc": 336, "rl": null, "rv": null}, {"id": 80, "tl": null, "tv": null, "plc": 338, "pvc": 339, "rlc": 340, "rvc": 341, "rl": null, "rv": null}, {"id": 81, "tl": null, "tv": null, "plc": 342, "pvc": 343, "rlc": 344, "rvc": 345, "rl": null, "rv": null}, {"id": 82, "tl": null, "tv": null, "plc": 346, "pvc": 347, "rlc": 348, "rvc": 349, "rl": null, "rv": null}, {"id": 83, "tl": null, "tv": null, "plc": 351, "pvc": 352, "rlc": 353, "rvc": 354, "rl": null, "rv": null}, {"id": 84, "tl": null, "tv": null, "plc": 355, "pvc": 356, "rlc": 357, "rvc": 358, "rl": null, "rv": null}, {"id": 85, "tl": null, "tv": null, "plc": 359, "pvc": 360, "rlc": 361, "rvc": 362, "rl": null, "rv": null}, {"id": 86, "tl": null, "tv": null, "plc": 364, "pvc": 365, "rlc": 366, "rvc": 367, "rl": null, "rv": null}, {"id": 87, "tl": null, "tv": null, "plc": 368, "pvc": 369, "rlc": 370, "rvc": 371, "rl": null, "rv": null}, {"id": 88, "tl": null, "tv": null, "plc": 372, "pvc": 373, "rlc": 374, "rvc": 375, "rl": null, "rv": null}, {"id": 89, "tl": null, "tv": null, "plc": 377, "pvc": 378, "rlc": 379, "rvc": 380, "rl": null, "rv": null}, {"id": 90, "tl": null, "tv": null, "plc": 381, "pvc": 382, "rlc": 383, "rvc": 384, "rl": null, "rv": null}, {"id": 91, "tl": null, "tv": null, "plc": 386, "pvc": 387, "rlc": 388, "rvc": 389, "rl": null, "rv": null}, {"id": 92, "tl": null, "tv": null, "plc": 390, "pvc": 391, "rlc": 392, "rvc": 393, "rl": null, "rv": null}, {"id": 93, "tl": null, "tv": null, "plc": 395, "pvc": 396, "rlc": 397, "rvc": 398, "rl": null, "rv": null}, {"id": 94, "tl": null, "tv": null, "plc": 399, "pvc": 400, "rlc": 401, "rvc": 402, "rl": null, "rv": null}, {"id": 95, "tl": null, "tv": null, "plc": 404, "pvc": 405, "rlc": 406, "rvc": 407, "rl": null, "rv": null}, {"id": 96, "tl": null, "tv": null, "plc": 408, "pvc": 409, "rlc": 410, "rvc": 411, "rl": null, "rv": null}, {"id": 97, "tl": null, "tv": null, "plc": 413, "pvc": 414, "rlc": 415, "rvc": 416, "rl": null, "rv": null}, {"id": 98, "tl": null, "tv": null, "plc": 418, "pvc": 419, "rlc": 420, "rvc": 421, "rl": null, "rv": null}, {"id": 99, "tl": null, "tv": null, "plc": 423, "pvc": 424, "rlc": 425, "rvc": 426, "rl": null, "rv": null}, {"id": 100, "tl": null, "tv": null, "plc": 427, "pvc": 428, "rlc": 429, "rvc": 430, "rl": null, "rv": null}, {"id": 101, "tl": null, "tv": null, "plc": 432, "pvc": 433, "rlc": 434, "rvc": 435, "rl": null, "rv": null}, {"id": 102, "tl": null, "tv": null, "plc": 437, "pvc": 438, "rlc": 439, "rvc": 440, "rl": null, "rv": null}, {"id": 103, "tl": null, "tv": null, "plc": 442, "pvc": 443, "rlc": 444, "rvc": 445, "rl": null, "rv": null}, {"id": 104, "tl": null, "tv": null, "plc": 447, "pvc": 448, "rlc": 449, "rvc": 450, "rl": null, "rv": null}];
@@ -265,6 +296,8 @@ const PRECOMP = {
   history:   [{"label": "J1", "pts": {"Michael Letrado": 6, "Sergio Echeverria": 7, "Gabriel Letrado": 6, "Javier Adames": 6, "Edward Rios": 10, "Karen Vargas": 9, "Monica Marin": 9, "Cesar Letrado": 8, "Kevin Ravelo": 5, "Mateo Salamanca": 8, "Esmeralda Rueda": 8, "Julian Rodriguez": 3, "Diego Marin": 10, "Samuel Ramirez": 9, "Cristian Godoy": 8, "Peter Letrado": 6, "Nicolas Letrado": 6, "Orlando Narvaez": 4, "Andres Castro": 6, "Fredy Hernandez": 9, "Sneyder Bonilla": 9, "Yury Romero": 9, "Juan Moreno": 5, "Oscar Letrado": 4, "Juan Merchan": 5, "Abraham Ramirez": 6, "Juan Naranjo": 9, "Felipe Higuita": 3, "Mariana Letrado": 4, "Dilan Buitrago": 6, "Deivid Ramirez": 9, "Fredy Letrado": 5}}, {"label": "J2", "pts": {"Michael Letrado": 7, "Sergio Echeverria": 7, "Gabriel Letrado": 8, "Javier Adames": 8, "Edward Rios": 11, "Karen Vargas": 13, "Monica Marin": 14, "Cesar Letrado": 10, "Kevin Ravelo": 6, "Mateo Salamanca": 8, "Esmeralda Rueda": 15, "Julian Rodriguez": 8, "Diego Marin": 11, "Samuel Ramirez": 9, "Cristian Godoy": 9, "Peter Letrado": 14, "Nicolas Letrado": 10, "Orlando Narvaez": 12, "Andres Castro": 6, "Fredy Hernandez": 10, "Sneyder Bonilla": 14, "Yury Romero": 9, "Juan Moreno": 10, "Oscar Letrado": 9, "Juan Merchan": 9, "Abraham Ramirez": 7, "Juan Naranjo": 14, "Felipe Higuita": 9, "Mariana Letrado": 9, "Dilan Buitrago": 7, "Deivid Ramirez": 13, "Fredy Letrado": 7}}, {"label": "J3", "pts": {"Michael Letrado": 14, "Sergio Echeverria": 12, "Gabriel Letrado": 13, "Javier Adames": 13, "Edward Rios": 16, "Karen Vargas": 18, "Monica Marin": 23, "Cesar Letrado": 12, "Kevin Ravelo": 13, "Mateo Salamanca": 13, "Esmeralda Rueda": 20, "Julian Rodriguez": 12, "Diego Marin": 16, "Samuel Ramirez": 14, "Cristian Godoy": 15, "Peter Letrado": 20, "Nicolas Letrado": 14, "Orlando Narvaez": 17, "Andres Castro": 11, "Fredy Hernandez": 15, "Sneyder Bonilla": 18, "Yury Romero": 14, "Juan Moreno": 15, "Oscar Letrado": 15, "Juan Merchan": 14, "Abraham Ramirez": 14, "Juan Naranjo": 21, "Felipe Higuita": 17, "Mariana Letrado": 14, "Dilan Buitrago": 12, "Deivid Ramirez": 17, "Fredy Letrado": 13}}, {"label": "J4", "pts": {"Michael Letrado": 22, "Sergio Echeverria": 26, "Gabriel Letrado": 21, "Javier Adames": 19, "Edward Rios": 24, "Karen Vargas": 26, "Monica Marin": 32, "Cesar Letrado": 26, "Kevin Ravelo": 21, "Mateo Salamanca": 21, "Esmeralda Rueda": 28, "Julian Rodriguez": 25, "Diego Marin": 24, "Samuel Ramirez": 24, "Cristian Godoy": 21, "Peter Letrado": 28, "Nicolas Letrado": 22, "Orlando Narvaez": 24, "Andres Castro": 19, "Fredy Hernandez": 23, "Sneyder Bonilla": 31, "Yury Romero": 21, "Juan Moreno": 25, "Oscar Letrado": 23, "Juan Merchan": 25, "Abraham Ramirez": 27, "Juan Naranjo": 29, "Felipe Higuita": 17, "Mariana Letrado": 22, "Dilan Buitrago": 21, "Deivid Ramirez": 17, "Fredy Letrado": 20}}, {"label": "J5", "pts": {"Michael Letrado": 25, "Sergio Echeverria": 28, "Gabriel Letrado": 25, "Javier Adames": 24, "Edward Rios": 27, "Karen Vargas": 28, "Monica Marin": 36, "Cesar Letrado": 29, "Kevin Ravelo": 27, "Mateo Salamanca": 22, "Esmeralda Rueda": 33, "Julian Rodriguez": 26, "Diego Marin": 27, "Samuel Ramirez": 29, "Cristian Godoy": 22.5, "Peter Letrado": 30, "Nicolas Letrado": 28, "Orlando Narvaez": 28, "Andres Castro": 25, "Fredy Hernandez": 26, "Sneyder Bonilla": 36, "Yury Romero": 24, "Juan Moreno": 28, "Oscar Letrado": 33, "Juan Merchan": 31, "Abraham Ramirez": 31, "Juan Naranjo": 33, "Felipe Higuita": 26, "Mariana Letrado": 28, "Dilan Buitrago": 27, "Deivid Ramirez": 20, "Fredy Letrado": 23}}, {"label": "J6", "pts": {"Michael Letrado": 38, "Sergio Echeverria": 42, "Gabriel Letrado": 41, "Javier Adames": 37, "Edward Rios": 43, "Karen Vargas": 43, "Monica Marin": 52, "Cesar Letrado": 37, "Kevin Ravelo": 45, "Mateo Salamanca": 40, "Esmeralda Rueda": 48, "Julian Rodriguez": 37, "Diego Marin": 41, "Samuel Ramirez": 37, "Cristian Godoy": 39.5, "Peter Letrado": 46, "Nicolas Letrado": 45, "Orlando Narvaez": 41, "Andres Castro": 38, "Fredy Hernandez": 43, "Sneyder Bonilla": 52, "Yury Romero": 40, "Juan Moreno": 36, "Oscar Letrado": 45, "Juan Merchan": 47, "Abraham Ramirez": 47, "Juan Naranjo": 49, "Felipe Higuita": 39, "Mariana Letrado": 42, "Dilan Buitrago": 44, "Deivid Ramirez": 37, "Fredy Letrado": 37}}, {"label": "J7", "pts": {"Michael Letrado": 45, "Sergio Echeverria": 52, "Gabriel Letrado": 48, "Javier Adames": 45, "Edward Rios": 53, "Karen Vargas": 51, "Monica Marin": 59, "Cesar Letrado": 44, "Kevin Ravelo": 52, "Mateo Salamanca": 49, "Esmeralda Rueda": 56, "Julian Rodriguez": 46, "Diego Marin": 50, "Samuel Ramirez": 47, "Cristian Godoy": 50.5, "Peter Letrado": 57, "Nicolas Letrado": 52, "Orlando Narvaez": 52, "Andres Castro": 44, "Fredy Hernandez": 52, "Sneyder Bonilla": 58, "Yury Romero": 49, "Juan Moreno": 43, "Oscar Letrado": 54, "Juan Merchan": 56, "Abraham Ramirez": 59, "Juan Naranjo": 60, "Felipe Higuita": 50, "Mariana Letrado": 51, "Dilan Buitrago": 55, "Deivid Ramirez": 48, "Fredy Letrado": 49}}, {"label": "J8", "pts": {"Michael Letrado": 51, "Sergio Echeverria": 60, "Gabriel Letrado": 52, "Javier Adames": 50, "Edward Rios": 62, "Karen Vargas": 60, "Monica Marin": 68, "Cesar Letrado": 51, "Kevin Ravelo": 60, "Mateo Salamanca": 61, "Esmeralda Rueda": 66, "Julian Rodriguez": 57, "Diego Marin": 59, "Samuel Ramirez": 55, "Cristian Godoy": 61.5, "Peter Letrado": 62, "Nicolas Letrado": 60, "Orlando Narvaez": 55.5, "Andres Castro": 54, "Fredy Hernandez": 64, "Sneyder Bonilla": 67, "Yury Romero": 59, "Juan Moreno": 51, "Oscar Letrado": 62, "Juan Merchan": 59.0, "Abraham Ramirez": 67, "Juan Naranjo": 69, "Felipe Higuita": 54.5, "Mariana Letrado": 60, "Dilan Buitrago": 63, "Deivid Ramirez": 57, "Fredy Letrado": 64}}, {"label": "J9", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J10", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J11", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J12", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J13", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J14", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J15", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J16", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J17", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J18", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J19", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J20", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J21", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J22", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J23", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J24", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J25", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J26", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J27", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J28", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J29", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J30", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J31", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J32", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J33", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}, {"label": "J34", "pts": {"Michael Letrado": 66, "Sergio Echeverria": 72, "Gabriel Letrado": 64, "Javier Adames": 56.5, "Edward Rios": 73, "Karen Vargas": 73, "Monica Marin": 80, "Cesar Letrado": 60, "Kevin Ravelo": 71, "Mateo Salamanca": 76, "Esmeralda Rueda": 79, "Julian Rodriguez": 71, "Diego Marin": 70, "Samuel Ramirez": 68, "Cristian Godoy": 74.5, "Peter Letrado": 73, "Nicolas Letrado": 75, "Orlando Narvaez": 66.5, "Andres Castro": 65, "Fredy Hernandez": 78, "Sneyder Bonilla": 79, "Yury Romero": 73, "Juan Moreno": 66, "Oscar Letrado": 75, "Juan Merchan": 71.0, "Abraham Ramirez": 80, "Juan Naranjo": 81, "Felipe Higuita": 60.0, "Mariana Letrado": 72, "Dilan Buitrago": 75, "Deivid Ramirez": 69, "Fredy Letrado": 80}}],
   sanciones:       {"Michael Letrado": {}, "Sergio Echeverria": {"10": 0.5}, "Gabriel Letrado": {}, "Javier Adames": {"9": 0.5}, "Edward Rios": {}, "Karen Vargas": {}, "Monica Marin": {}, "Cesar Letrado": {}, "Kevin Ravelo": {}, "Mateo Salamanca": {}, "Esmeralda Rueda": {}, "Julian Rodriguez": {}, "Diego Marin": {}, "Samuel Ramirez": {}, "Cristian Godoy": {"5": 0.5}, "Peter Letrado": {}, "Nicolas Letrado": {}, "Orlando Narvaez": {"8": 0.5}, "Andres Castro": {}, "Fredy Hernandez": {}, "Sneyder Bonilla": {}, "Yury Romero": {}, "Juan Moreno": {}, "Oscar Letrado": {}, "Juan Merchan": {"8": 0.5}, "Abraham Ramirez": {}, "Juan Naranjo": {}, "Felipe Higuita": {"8": 0.5, "9": 0.5}, "Mariana Letrado": {}, "Dilan Buitrago": {}, "Deivyd Ramirez": {"10": 0.5}, "Fredy Letrado": {}},
   partido_jornada: {"1": 1, "2": 1, "3": 2, "4": 2, "5": 3, "6": 3, "7": 3, "8": 3, "9": 4, "10": 4, "11": 4, "12": 4, "13": 5, "14": 5, "15": 5, "16": 5, "17": 6, "18": 6, "19": 6, "20": 6, "21": 7, "22": 7, "23": 7, "24": 7, "25": 8, "26": 8, "27": 8, "28": 8, "29": 9, "30": 9, "31": 9, "32": 9, "33": 10, "34": 10, "35": 10, "36": 10, "37": 11, "38": 11, "39": 11, "40": 11, "41": 12, "42": 12, "43": 12, "44": 12, "45": 13, "46": 13, "47": 13, "48": 13, "49": 14, "50": 14, "51": 14, "52": 14, "53": 14, "54": 14, "55": 15, "56": 15, "57": 15, "58": 15, "59": 15, "60": 15, "61": 16, "62": 16, "63": 16, "64": 16, "65": 16, "66": 16, "67": 17, "68": 17, "69": 17, "70": 17, "71": 17, "72": 17, "73": 18, "74": 19, "75": 19, "76": 19, "77": 20, "78": 20, "79": 20, "80": 21, "81": 21, "82": 21, "83": 22, "84": 22, "85": 22, "86": 23, "87": 23, "88": 23, "89": 24, "90": 24, "91": 25, "92": 25, "93": 26, "94": 26, "95": 27, "96": 27, "97": 28, "98": 29, "99": 30, "100": 30, "101": 31, "102": 32, "103": 33, "104": 34},
+  fun_facts:       {"lider_jornadas": [{"name": "Juan Naranjo", "jornadas": 28}, {"name": "Monica Marin", "jornadas": 4}, {"name": "Edward Rios", "jornadas": 1}, {"name": "Esmeralda Rueda", "jornadas": 1}], "mayor_subida": {"name": "Sergio Echeverria", "desde": 28, "hasta": 7, "jornada_label": "J4", "posiciones": 21}, "mayor_caida": {"name": "Felipe Higuita", "desde": 8, "hasta": 31, "jornada_label": "J4", "posiciones": -23}, "racha_podio": [{"name": "Monica Marin", "racha": 33}, {"name": "Juan Naranjo", "racha": 29}, {"name": "Abraham Ramirez", "racha": 26}], "sorpresa_jornada": null},
+  sanciones_list:  [{"name": "Cristian Godoy", "jornada_num": 5, "jornada_label": "J5", "pts_originales": null}, {"name": "Felipe Higuita", "jornada_num": 8, "jornada_label": "J8", "pts_originales": null}, {"name": "Juan Merchan", "jornada_num": 8, "jornada_label": "J8", "pts_originales": null}, {"name": "Orlando Narvaez", "jornada_num": 8, "jornada_label": "J8", "pts_originales": null}, {"name": "Felipe Higuita", "jornada_num": 9, "jornada_label": "J9", "pts_originales": null}, {"name": "Javier Adames", "jornada_num": 9, "jornada_label": "J9", "pts_originales": null}, {"name": "Deivyd Ramirez", "jornada_num": 10, "jornada_label": "J10", "pts_originales": null}, {"name": "Sergio Echeverria", "jornada_num": 10, "jornada_label": "J10", "pts_originales": null}],
 };
 
 // ── ESTADO ─────────────────────────────────────────────────
@@ -378,7 +411,7 @@ function loadExcel(input){
 }
 
 // ── RENDERS ────────────────────────────────────────────────
-function renderAll(){renderStandings();renderPronos();renderPartidos();renderIniciales();renderGraficas();}
+function renderAll(){renderStandings();renderPronos();renderPartidos();renderIniciales();renderGraficas();renderSanciones();renderCuriosos();}
 function chipCls(p){if(p===null||p===undefined)return'chip-nd';if(p===5)return'chip-5';if(p===4)return'chip-4';if(p===3)return'chip-3';if(p===1)return'chip-1';return'chip-0';}
 
 function renderStandings(){
@@ -548,7 +581,136 @@ function buildNameMaps(){
   return maps;
 }
 
+// ── SANCIONES ──────────────────────────────────────────────
+function renderSanciones(){
+  const list = (PRECOMP.sanciones_list || []);
+  const el = document.getElementById('sanciones-list');
+  if (!el) return;
+  if (!list.length) {
+    el.innerHTML = `<div class="san-empty">✅ Sin sanciones aplicadas hasta el momento</div>`;
+    return;
+  }
+  el.innerHTML = list.map(s => `
+    <div class="san-card" data-name="${s.name.toLowerCase()}" data-jornada="${s.jornada_label.toLowerCase()}">
+      <div class="san-name">${s.name}</div>
+      <div class="san-jornada">${s.jornada_label} · -50%</div>
+    </div>
+  `).join('');
+}
+
+function filterSanciones(q){
+  const lq = q.toLowerCase().trim();
+  document.querySelectorAll('.san-card').forEach(c => {
+    const match = c.dataset.name.includes(lq) || c.dataset.jornada.includes(lq);
+    c.style.display = match ? '' : 'none';
+  });
+}
+
+// ── DATOS CURIOSOS ─────────────────────────────────────────
+function renderCuriosos(){
+  const el = document.getElementById('curiosos-list');
+  if (!el) return;
+  const ff = PRECOMP.fun_facts || {};
+  const cards = [];
+
+  // Líder con más jornadas
+  if (ff.lider_jornadas && ff.lider_jornadas.length) {
+    const top = ff.lider_jornadas[0];
+    cards.push({
+      icon: '👑',
+      title: 'Liderato más sólido',
+      text: `<b>${top.name}</b> ha liderado la tabla durante <b>${top.jornadas}</b> partido${top.jornadas!==1?'s':''}`,
+    });
+  }
+
+  // Mayor subida histórica
+  if (ff.mayor_subida) {
+    const m = ff.mayor_subida;
+    cards.push({
+      icon: '🚀',
+      title: 'Mayor remontada',
+      text: `<b>${m.name}</b> subió <b>${m.posiciones}</b> puesto${m.posiciones!==1?'s':''} en la <b>${m.jornada_label}</b>`,
+      sub: `Pasó del puesto #${m.desde} al #${m.hasta}`,
+    });
+  }
+
+  // Sorpresa de la última jornada
+  if (ff.sorpresa_jornada) {
+    const s = ff.sorpresa_jornada;
+    cards.push({
+      icon: '⚡',
+      title: `Sorpresa de la ${s.jornada_label}`,
+      text: `<b>${s.name}</b> subió <b>${s.posiciones}</b> puesto${s.posiciones!==1?'s':''} de un salto`,
+      sub: `Del puesto #${s.desde} al #${s.hasta}`,
+    });
+  }
+
+  // Mayor caída
+  if (ff.mayor_caida) {
+    const c = ff.mayor_caida;
+    cards.push({
+      icon: '📉',
+      title: 'Mayor caída',
+      text: `<b>${c.name}</b> bajó <b>${Math.abs(c.posiciones)}</b> puesto${Math.abs(c.posiciones)!==1?'s':''} en la <b>${c.jornada_label}</b>`,
+      sub: `Pasó del puesto #${c.desde} al #${c.hasta}`,
+    });
+  }
+
+  // Racha en podio
+  if (ff.racha_podio && ff.racha_podio.length) {
+    const top = ff.racha_podio[0];
+    cards.push({
+      icon: '🔥',
+      title: 'Racha en el podio',
+      text: `<b>${top.name}</b> lleva <b>${top.racha}</b> partido${top.racha!==1?'s':''} consecutivo${top.racha!==1?'s':''} en el top 3`,
+    });
+    if (ff.racha_podio.length > 1) {
+      const others = ff.racha_podio.slice(1).map(r => `${r.name.split(' ')[0]} (${r.racha})`).join(', ');
+      cards.push({
+        icon: '🥉',
+        title: 'Otras rachas activas',
+        text: others,
+      });
+    }
+  }
+
+  if (!cards.length) {
+    el.innerHTML = `<div class="san-empty">📊 Aún no hay suficientes jornadas jugadas para generar datos curiosos</div>`;
+    return;
+  }
+
+  el.innerHTML = cards.map(c => `
+    <div class="curioso-card">
+      <div class="curioso-icon">${c.icon}</div>
+      <div>
+        <div class="curioso-title">${c.title}</div>
+        <div class="curioso-text">${c.text}</div>
+        ${c.sub ? `<div class="curioso-sub">${c.sub}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+
+// ── COMPARATIVA DE 2 JUGADORES EN LA EVOLUCIÓN ─────────────
+// Estado de selección: hasta 2 nombres seleccionados para resaltar
+let evolCompareSelection = [];
+let evolLastHist = [];
+let evolLastNames = [];
+
+function toggleEvolCompare(name){
+  const idx = evolCompareSelection.indexOf(name);
+  if (idx >= 0) {
+    evolCompareSelection.splice(idx, 1);
+  } else {
+    if (evolCompareSelection.length >= 2) evolCompareSelection.shift(); // máximo 2: rota el más viejo
+    evolCompareSelection.push(name);
+  }
+  drawEvolChart(document.getElementById('evol-chart'), evolLastHist, evolLastNames);
+}
+
 function drawEvolChart(canvas, hist, names){
+  evolLastHist = hist; evolLastNames = names; // guardar para que toggleEvolCompare pueda re-dibujar
   const COLORS=['#f0c040','#5bc85b','#4a9ae0','#e05555','#b06ae0','#e0906a',
                 '#5be0d4','#e0c45b','#a8e063','#e063a8'];
   const dpr = window.devicePixelRatio||1;
@@ -557,9 +719,14 @@ function drawEvolChart(canvas, hist, names){
   const allPts = names.flatMap(n => hist.map(h => h.pts[n]||0));
   const maxPts = Math.max(...allPts, 1);
 
-  // Sort top 10 by last jornada
+  // Sort top 10 by last jornada — solo para la vista por defecto (sin comparación activa)
   const lastPts = n => hist[hist.length-1].pts[n]||0;
-  const topNames = [...names].sort((a,b)=>lastPts(b)-lastPts(a)).slice(0,10);
+  const allNamesSorted = [...names].sort((a,b)=>lastPts(b)-lastPts(a)); // TODOS los participantes, ordenados
+  const topNames = allNamesSorted.slice(0,10); // solo para dibujar cuando no hay comparación
+
+  // ¿Hay una comparativa activa? Si sí, solo se dibujan esos 2 (con más fuerza visual)
+  const comparing = evolCompareSelection.length === 2;
+  const drawNames = comparing ? evolCompareSelection : topNames;
 
   // Canvas area — no right labels, more right padding just for dots
   const PAD = {top:16, right:14, bottom:28, left:38};
@@ -587,10 +754,12 @@ function drawEvolChart(canvas, hist, names){
   });
 
   // Draw lines — dots at each point, no text on canvas
-  topNames.forEach((name, ci) => {
+  // En modo comparación: líneas más gruesas y con relleno bajo el área para destacar
+  drawNames.forEach((name) => {
+    const ci = allNamesSorted.indexOf(name);
     const pts = hist.map(h => h.pts[name]||0);
     const color = COLORS[ci % COLORS.length];
-    ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+    ctx.strokeStyle = color; ctx.lineWidth = comparing ? 3 : 2.5;
     ctx.beginPath();
     pts.forEach((p,i) => {
       const x = PAD.left + (nJ===1 ? plotW/2 : i/(nJ-1)*plotW);
@@ -602,22 +771,31 @@ function drawEvolChart(canvas, hist, names){
     pts.forEach((p,i) => {
       const x = PAD.left + (nJ===1 ? plotW/2 : i/(nJ-1)*plotW);
       const y = PAD.top + plotH - (p/maxPts)*plotH;
-      ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,comparing?4:3,0,Math.PI*2); ctx.fill();
     });
   });
 
-  // Separate HTML legend below the canvas
+  // Mensaje de ayuda para activar comparación
   const wrap = canvas.parentElement;
+  let hint = wrap.querySelector('.compare-hint');
+  if(!hint){ hint = document.createElement('div'); hint.className='compare-hint'; wrap.insertBefore(hint, wrap.querySelector('.evol-legend')); }
+  hint.textContent = comparing
+    ? `Comparando: ${evolCompareSelection.map(n=>n.split(' ')[0]).join(' vs ')} — toca un chip para quitar`
+    : 'Toca hasta 2 nombres de la lista para comparar su evolución cabeza a cabeza (desplázate para ver a todos)';
+
+  // Separate HTML legend below the canvas — TODOS los participantes, clickeable para comparar
   let legend = wrap.querySelector('.evol-legend');
   if(!legend){ legend = document.createElement('div'); legend.className = 'evol-legend'; wrap.appendChild(legend); }
-  legend.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;';
-  legend.innerHTML = topNames.map((name, ci) => {
+  legend.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;max-height:220px;overflow-y:auto;padding:4px 2px;';
+  legend.innerHTML = allNamesSorted.map((name, ci) => {
     const parts = name.split(' ');
     const sh = `${parts[0]} ${parts[parts.length-1]}`;
     const pts = lastPts(name);
-    return `<div style="display:flex;align-items:center;gap:5px;background:var(--card2);border-radius:20px;padding:3px 10px;border:1px solid var(--border)">
-      <div style="width:10px;height:10px;border-radius:50%;background:${COLORS[ci%COLORS.length]};flex-shrink:0"></div>
-      <span style="font-size:.72rem;color:var(--text)">${sh}</span>
+    const isSelected = evolCompareSelection.includes(name);
+    const safeName = name.replace(/'/g, "\\'");
+    return `<div class="compare-chip${isSelected?' selected':''}" onclick="toggleEvolCompare('${safeName}')">
+      <div class="dot" style="background:${COLORS[ci%COLORS.length]}"></div>
+      <span>${sh}</span>
       <span style="font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:${COLORS[ci%COLORS.length]}">${pts}</span>
     </div>`;
   }).join('');
